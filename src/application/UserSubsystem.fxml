@@ -8,11 +8,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane layoutX="-6.0" prefHeight="550.0" prefWidth="750.0">
          <children>
+            <Button layoutX="665.0" layoutY="9.0" mnemonicParsing="false" text="Quit" />
             <Text layoutX="320.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logged in as User" />
             <ListView layoutX="28.0" layoutY="80.0" prefHeight="318.0" prefWidth="423.0" />
             <Button layoutX="480.0" layoutY="441.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="68.0" text="Rename" />
@@ -32,6 +32,7 @@
                   <Font size="23.0" />
                </font>
             </Text>
+            <Button layoutX="569.0" layoutY="9.0" mnemonicParsing="false" text="Logout" />
          </children>
       </AnchorPane>
    </children>
