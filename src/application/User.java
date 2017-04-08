@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class User implements Serializable{
 
 		private String userName;
-		private boolean isAdmin=false;
+	
 		private ArrayList<Album> album; //maybe LIST will be better
 		
 	public User(String userName)

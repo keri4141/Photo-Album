@@ -93,6 +93,9 @@ public class LoginController {
         			System.out.println("HERE: "+ listofpeep.get(i));
         			break;
         		}
+        		
+        		/*SIDE NOTE, W.E YU CHANGE THAT IMPLEMENTS SERIALIZABLE WILL MAKE A NEW FILE */
+        		/* on user sign in, move to the album creation page */
         	}
         }
         

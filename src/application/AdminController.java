@@ -68,6 +68,7 @@ public class AdminController {
     	FileHandler.fileofUsers.add(person);
     	users.add(person);
     	userlist.setItems(users);
+    	 FileHandler.WriteFile();
     }
     
     public void handleDelete(ActionEvent e) throws IOException
