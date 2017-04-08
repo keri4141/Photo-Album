@@ -2,6 +2,7 @@ package application;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -35,6 +36,20 @@ public class FileHandler {
 
 	        }
 
+	    }
+	    
+	    public static List<User> retrieveUsers() throws ClassNotFoundException
+	    {
+	    	List<User> listU = null;
+	    	try
+	    	{
+	    		 ObjectInputStream in = new ObjectInputStream(new FileInputStream(path));
+	    		listU=(List<User>)in.readObject();
+	    	}catch(IOException ex )
+	    	{
+	    		System.out.printf("Problem occurred during deserializing");
+	    	}
+	    	return listU;
 	    }
 	
 }

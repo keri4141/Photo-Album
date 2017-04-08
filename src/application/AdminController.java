@@ -87,16 +87,34 @@ public class AdminController {
       
     }
     
-    public void handleLogout(ActionEvent e) throws IOException
+    public void handleLogout(ActionEvent e) throws IOException, ClassNotFoundException
     {
     	
+    	FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("Login.fxml"));
+        Parent root = (Parent) loader.load();
+    		//Parent home_page_parent=FXMLLoader.load(getClass().getResource("AdminSubsystem.fxml"));
+    		Scene home_page_scene=new Scene(root);
+    		Stage app_stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+    	
+    		app_stage.hide();
+    		app_stage.setScene(home_page_scene);
+    		
+    		LoginController logincontrol =loader.getController();
+    		
+    		app_stage.show();
+    		logincontrol.start(app_stage);
+    		
+        	//login as admin stuff"
+        	//maybe add a user boolean is admin thing
+    	/*
     	Parent home_page_parent=FXMLLoader.load(getClass().getResource("Login.fxml"));
 		Scene home_page_scene=new Scene(home_page_parent);
 		Stage app_stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 		app_stage.hide();
 		app_stage.setScene(home_page_scene);
 		app_stage.show();
-		 
+		 */
     }
     
  
