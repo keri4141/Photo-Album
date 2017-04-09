@@ -85,6 +85,7 @@ public class AdminController {
         users.remove(person);
       
         FileHandler.fileofUsers.remove(person);
+        FileHandler.WriteFile();
       
     }
     

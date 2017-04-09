@@ -1,9 +1,10 @@
 package application;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 
-public class Photos {
+public class Photos implements Serializable{
 
 	private String caption;
 	private ArrayList<String>tag;
