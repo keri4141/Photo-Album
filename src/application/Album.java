@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Album implements Serializable{
+public class Album implements Serializable,Comparable<Album>{
 
 	/**
 	 * 
@@ -13,6 +13,11 @@ public class Album implements Serializable{
 	private String albumName;
 	private ArrayList<Photos> photos;
 	
+	
+	public int compareTo(Album a)
+	{
+		return this.albumName.compareTo(a.albumName);
+	}
 	
 	public Album(String name)
 	{
