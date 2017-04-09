@@ -14,11 +14,10 @@
       <AnchorPane layoutX="-6.0" prefHeight="550.0" prefWidth="750.0">
          <children>
             <Button layoutX="665.0" layoutY="9.0" mnemonicParsing="false" text="Quit" />
-            <Text layoutX="320.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logged in as User" />
-            <Button fx:id="albumRename" onAction="#handleRename" layoutX="480.0" layoutY="441.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="68.0" text="Rename" />
-            <Button fx:id="albumOpen" onAction="#handleOpen" layoutX="569.0" layoutY="441.0" mnemonicParsing="false" text="Open" />
-            <Button fx:id="albumDelete" onAction="#handleDelete" layoutX="397.0" layoutY="441.0" mnemonicParsing="false" text="Delete" />
-            <Button fx:id="albumCreate" onAction="#handleCreate" layoutX="312.0" layoutY="441.0" mnemonicParsing="false" text="Create" />
+            <Button fx:id="albumRename" layoutX="480.0" layoutY="441.0" mnemonicParsing="false" onAction="#handleRename" prefHeight="27.0" prefWidth="68.0" text="Rename" />
+            <Button fx:id="albumOpen" layoutX="569.0" layoutY="441.0" mnemonicParsing="false" onAction="#handleOpen" text="Open" />
+            <Button fx:id="albumDelete" layoutX="397.0" layoutY="441.0" mnemonicParsing="false" onAction="#handleDelete" text="Delete" />
+            <Button fx:id="albumCreate" layoutX="312.0" layoutY="441.0" mnemonicParsing="false" onAction="#handleCreate" text="Create" />
             <Button layoutX="647.0" layoutY="441.0" mnemonicParsing="false" text="Search" />
             <TextField fx:id="albumField" layoutX="72.0" layoutY="441.0" promptText="Album Name" />
             <Text layoutX="28.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Albums" wrappingWidth="99.94433441758156">
@@ -32,17 +31,21 @@
                   <Font size="23.0" />
                </font>
             </Text>
-            <Button fx:id="logout" onAction="#handleLogOut" layoutX="569.0" layoutY="9.0" mnemonicParsing="false" text="Logout" />
+            <Button fx:id="logout" layoutX="569.0" layoutY="9.0" mnemonicParsing="false" onAction="#handleLogOut" text="Logout" />
             <ListView fx:id="albumlist" layoutX="28.0" layoutY="80.0" prefHeight="318.0" prefWidth="384.0" />
             <Label layoutX="488.0" layoutY="91.0" text="Album Name">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Text layoutX="490.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Photos: 0" />
-            <Text layoutX="490.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of Photo Taken: month/year" />
-            <Text layoutX="490.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Earliest Photo Taken: month/year" />
-            <Text layoutX="490.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Latest Photo Taken: month/year" />
+            <Label layoutX="488.0" layoutY="138.0" text="Number of Photos: " />
+            <Label layoutX="488.0" layoutY="178.0" text="Earliest Photo Taken: month/year" />
+            <Label layoutX="488.0" layoutY="218.0" text="Latest Photo Taken: month/year" />
+            <Label layoutX="323.0" layoutY="14.0" text="Logged in as:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>
