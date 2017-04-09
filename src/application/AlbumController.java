@@ -119,6 +119,23 @@ public class AlbumController {
              return;   	
          }
 		 
+		 /*
+		  * Check if the album name already exists for this user
+		  */
+		for(Album a: albums_ObservableLIST)
+		{
+			if(a.toString().equals(albumField.getText()))
+            {
+                Alert alert =
+                        new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("This album already exists!");
+                alert.showAndWait();
+                return;
+            }
+		}
+		
+		 
+		 
 		 //create new album
 		 Album new_album=new Album(albumField.getText());
 		 
@@ -144,15 +161,12 @@ public class AlbumController {
 	       		FileHandler.WriteFile();
 	       	   }
 	       }
-		 
-		 
-		 
-		 
-		 
+	 
 	}
 	
 	public void handleDelete(ActionEvent e)
 	{
+		//selected album
 		Album album = albumlist.getSelectionModel().getSelectedItem();
 
         int nextIndex = albumlist.getSelectionModel().getSelectedIndex() + 1;
@@ -163,6 +177,12 @@ public class AlbumController {
         }
 
         albums_ObservableLIST.remove(album);
+        
+        /*
+         * Loops through the userslist and finds the matching user in the handleFile users list
+         * then loops through that users album list and finds a matching album name to remove from the album list
+         * from that user
+         */
         for(int i =0;i<USERS.size();i++)
 	       {
 	       	   if(USERS.get(i).toString().equals(userNAME))
@@ -181,9 +201,7 @@ public class AlbumController {
 	       				}
 	       			}
 	       		System.out.println("HM: " + FileHandler.fileofUsers.get(i).getAlbumList());
-	       		   //test to see if it was added
-	       		  // System.out.println("ALBUM: "+FileHandler.fileofUsers.get(i).getAlbumList());
-	       		
+	  
 	       		FileHandler.WriteFile();
 	       		break;
 	       	   }
@@ -197,5 +215,7 @@ public class AlbumController {
 		
 		
 	}
+	
+
 
 }
