@@ -2,13 +2,19 @@ package application;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class User implements Serializable{
 
+		/**
+	 * 
+	 */
+	private static final long serialVersionUID = -661828491489966978L;
+
 		private String userName;
 	
-		private ArrayList<Album> album; //maybe LIST will be better
+		private List<Album> album; //maybe LIST will be better
 		
 	public User(String userName)
 	{
@@ -42,6 +48,11 @@ public class User implements Serializable{
         return this.userName;
 
     }
+	
+	public List<Album> getAlbumList()
+	{
+		return this.album;
+	}
 	
 	
 }

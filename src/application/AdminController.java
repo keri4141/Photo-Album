@@ -66,8 +66,8 @@ public class AdminController {
          }
     	User person = new User(usernameField.getText());
     	FileHandler.fileofUsers.add(person);
-    	users.add(person);
-    	userlist.setItems(users);
+    	users.add(person);//add to observable list
+    	userlist.setItems(users); //add to list view
     	 FileHandler.WriteFile();
     }
     

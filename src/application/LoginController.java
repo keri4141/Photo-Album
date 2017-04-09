@@ -46,7 +46,7 @@ public class LoginController {
     }
     
    
-    public void handleLogin(ActionEvent e) throws IOException
+    public void handleLogin(ActionEvent e) throws IOException, ClassNotFoundException
     {
     	//name must not be empty
         if("".equals(userField.getText()))
@@ -79,9 +79,9 @@ public class LoginController {
 	        	//login as admin stuff"
 	        	//maybe add a user boolean is admin thing
 	        }
-        else if("admin".equals(userField.getText())==false)
+        else if("admin".equals(userField.getText())==false) //if its not admin then he typed something else
         {
-        	ArrayList listofpeep=(ArrayList) USERS;
+        	ArrayList listofpeep=(ArrayList) USERS; //typecast it into arraylist so I can loop easier
         	String usernamefield=userField.getText();
         	
         	for( int i=0;i<listofpeep.size();i++)
@@ -90,7 +90,20 @@ public class LoginController {
         		
         		if(listofpeep.get(i).toString().equals(usernamefield))
         		{
-        			System.out.println("HERE: "+ listofpeep.get(i));
+        			FXMLLoader loader = new FXMLLoader();
+        	        loader.setLocation(getClass().getResource("UserSubsystem.fxml"));
+        	        Parent root = (Parent) loader.load();
+                		//Parent home_page_parent=FXMLLoader.load(getClass().getResource("AdminSubsystem.fxml"));
+                		Scene home_page_scene=new Scene(root);
+                		Stage app_stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                	
+                		app_stage.hide();
+                		app_stage.setScene(home_page_scene);
+                		
+                		AlbumController albumcontrol =loader.getController();
+                		
+                		app_stage.show();
+                		albumcontrol.start(app_stage,usernamefield);
         			break;
         		}
         		
