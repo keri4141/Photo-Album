@@ -6,12 +6,17 @@ import java.util.Calendar;
 
 public class Photos implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -501614198631312081L;
 	private String caption;
-	private ArrayList<String>tag;
+	private ArrayList<Tag>tag;
 	private boolean isStock;
+	private String pathtoImage;
 	private Calendar date;
 	
-	public Photos(String caption,ArrayList<String> tag, Calendar date)
+	public Photos(String caption,ArrayList<Tag> tag, Calendar date)
 	{
 		this.caption=caption;
 		this.tag=tag; //this may cause a bug
@@ -24,7 +29,7 @@ public class Photos implements Serializable{
 	public Photos()
 	{
 		this.caption="";
-		this.tag=new ArrayList<String>();
+		this.tag=new ArrayList<Tag>();
 		this.date=null;
 		
 		
@@ -36,7 +41,7 @@ public class Photos implements Serializable{
 		this.caption=caption;
 	}
 	
-	public void setTag(String tag)
+	public void setTag(Tag tag)
 	{
 		this.tag.add(tag);
 		

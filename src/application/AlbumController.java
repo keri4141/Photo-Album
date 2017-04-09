@@ -40,6 +40,8 @@ public class AlbumController {
     List<User> USERS;
     String userNAME;
     
+    Album selected_album_name;
+    
     @FXML
     private ListView<Album> albumlist;
 
@@ -76,6 +78,26 @@ public class AlbumController {
        		break;
        	   }
        }
+       
+       /*
+        * Selecting an album
+        */
+       
+      // Album album_name; //album that the guy selected
+       
+    
+         albumlist.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue!=null) {
+
+              selected_album_name=newValue;
+              
+              System.out.println("NEWLY SELECTED GUY " + selected_album_name);
+   
+
+            }
+
+        });
+  
        
     }
     
@@ -210,10 +232,23 @@ public class AlbumController {
         //FileHandler.WriteFile();
 	}
 	
-	public void handleOpen(ActionEvent e)
+	public void handleOpen(ActionEvent e) throws IOException, ClassNotFoundException
 	{
 		
-		
+		FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("PhotoViewer.fxml"));
+        Parent root = (Parent) loader.load();
+    		//Parent home_page_parent=FXMLLoader.load(getClass().getResource("AdminSubsystem.fxml"));
+    		Scene home_page_scene=new Scene(root);
+    		Stage app_stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+    	
+    		app_stage.hide();
+    		app_stage.setScene(home_page_scene);
+    		
+    		PhotoController photocontrol =loader.getController();
+    		
+    		app_stage.show();
+    		photocontrol.start(app_stage,userNAME,selected_album_name);
 	}
 	
 
