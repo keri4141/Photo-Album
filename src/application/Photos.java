@@ -1,27 +1,29 @@
 package application;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 
 public class Photos {
 
 	private String caption;
-	private String tag;
+	private ArrayList<String>tag;
 	private boolean isStock;
 	private Calendar date;
 	
-	public Photos(String caption,String tag, Calendar date)
+	public Photos(String caption,ArrayList<String> tag, Calendar date)
 	{
 		this.caption=caption;
-		this.tag=tag; //may have to be a hashtable/hashmap
+		this.tag=tag; //this may cause a bug
 		this.date=date;
 		//may not need to edit the isStock field;
 		
 	}
 	
+	//sets fields of a new photo to be empty
 	public Photos()
 	{
 		this.caption="";
-		this.tag="";
+		this.tag=new ArrayList<String>();
 		this.date=null;
 		
 		
@@ -35,7 +37,7 @@ public class Photos {
 	
 	public void setTag(String tag)
 	{
-		this.tag=tag;
+		this.tag.add(tag);
 		
 	}
 }

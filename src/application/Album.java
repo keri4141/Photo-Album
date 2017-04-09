@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Album {
 
 	private String albumName;
-	private ArrayList<Photos> photos=new ArrayList<Photos>();
+	private ArrayList<Photos> photos;
 	
 	
 	public Album(String name,Photos photos)
@@ -19,6 +19,7 @@ public class Album {
 	public Album()
 	{
 		this.albumName="";
+		this.photos=new ArrayList<Photos>();
 	}
 	
 	public void setAlbumName(String name)
