@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="700.0" prefWidth="900.0">
+         <children>
+            <Button layoutX="25.0" layoutY="21.0" mnemonicParsing="false" text="Back to Albums" />
+            <ListView layoutX="554.0" layoutY="312.0" prefHeight="220.0" prefWidth="231.0" />
+            <VBox layoutX="28.0" layoutY="137.0" prefHeight="411.0" prefWidth="465.0" />
+            <Label layoutX="582.0" layoutY="60.0" text="Photo Search">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+            <Label layoutX="627.0" layoutY="109.0" text="Date Range">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <DatePicker layoutX="571.0" layoutY="137.0" />
+            <DatePicker layoutX="571.0" layoutY="208.0" />
+            <Label layoutX="655.0" layoutY="175.0" text="to">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="646.0" layoutY="281.0" text="Tags">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Button layoutX="553.0" layoutY="555.0" mnemonicParsing="false" text="Add Tag" />
+            <Button layoutX="700.0" layoutY="555.0" mnemonicParsing="false" text="Delete Tag" />
+            <Button layoutX="597.0" layoutY="613.0" mnemonicParsing="false" text="Search for Photos">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
