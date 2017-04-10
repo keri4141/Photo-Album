@@ -7,7 +7,6 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -26,27 +25,24 @@
                </font>
             </Text>
             <Button layoutX="1001.0" layoutY="8.0" mnemonicParsing="false" text="Quit" />
-            <Button layoutX="797.0" layoutY="645.0" mnemonicParsing="false" text="Add" />
-            <ScrollPane layoutX="438.0" layoutY="93.0" prefHeight="524.0" prefWidth="600.0">
-               <content>
-                  <TilePane prefHeight="700.0" prefWidth="582.0" />
-               </content>
-            </ScrollPane>
-            <Button layoutX="674.0" layoutY="667.0" mnemonicParsing="false" text="Caption" />
-            <TextArea layoutX="438.0" layoutY="649.0" prefHeight="67.0" prefWidth="217.0" />
-            <Button layoutX="975.2" layoutY="645.0" mnemonicParsing="false" text="Copy" />
-            <Button layoutX="975.0" layoutY="690.0" mnemonicParsing="false" text="Move" />
+            <Button layoutX="805.0" layoutY="645.0" mnemonicParsing="false" text="Add" />
+            <ScrollPane layoutX="438.0" layoutY="89.0" prefHeight="524.0" prefWidth="600.0" />
+            <Button layoutX="491.0" layoutY="710.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="95.0" text="Edit Caption" />
+            <TextArea layoutX="438.0" layoutY="634.0" prefHeight="67.0" prefWidth="217.0" />
+            <Button layoutX="987.5" layoutY="645.0" mnemonicParsing="false" text="Copy" />
+            <Button layoutX="987.0" layoutY="690.0" mnemonicParsing="false" text="Move" />
             <Text layoutX="681.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Photos">
                <font>
                   <Font size="27.0" />
                </font>
             </Text>
-            <Button layoutX="884.0" layoutY="690.0" mnemonicParsing="false" text="Search" />
-            <Button layoutX="797.0" layoutY="690.0" mnemonicParsing="false" text="Tags" />
-            <Button layoutX="884.0" layoutY="645.0" mnemonicParsing="false" text="Delete" />
+            <Button layoutX="890.0" layoutY="690.0" mnemonicParsing="false" text="Search" />
+            <Button layoutX="805.0" layoutY="690.0" mnemonicParsing="false" text="Tags" />
+            <Button layoutX="890.0" layoutY="645.0" mnemonicParsing="false" text="Delete" />
             <Separator layoutX="410.0" layoutY="39.76" orientation="VERTICAL" prefHeight="705.0" prefWidth="11.0" />
             <Separator layoutY="40.0" prefWidth="1059.0" />
-            <Label layoutX="450.0" layoutY="13.0" text="Logged in as: User" />
+            <Label layoutX="453.0" layoutY="13.0" text="Logged in as: User" />
+            <Button layoutX="685.0" layoutY="667.0" mnemonicParsing="false" text="Slideshow" />
          </children>
       </AnchorPane>
    </children>
