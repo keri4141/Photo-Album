@@ -2,6 +2,7 @@ package application;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Album implements Serializable,Comparable<Album>{
@@ -11,7 +12,7 @@ public class Album implements Serializable,Comparable<Album>{
 	 */
 	private static final long serialVersionUID = -3072840136991012841L;
 	private String albumName;
-	private ArrayList<Photos> photos;
+	private List<Photos> photos;
 	
 	
 	public int compareTo(Album a)
@@ -38,8 +39,21 @@ public class Album implements Serializable,Comparable<Album>{
 		
 	}
 	
+	public void setPhoto(Photos p)
+	{
+		this.photos.add(p);
+	}
+	
 	public String toString()
 	{
 		return this.albumName;
 	}
+	
+	public List<Photos> getPhotoList()
+	{
+		return this.photos;
+	}
+	
+	
+	
 }

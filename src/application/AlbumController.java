@@ -181,6 +181,7 @@ public class AlbumController {
 	       		albumlist.setItems(albums_ObservableLIST);
 	       		
 	       		FileHandler.WriteFile();
+	       		break;
 	       	   }
 	       }
 	 

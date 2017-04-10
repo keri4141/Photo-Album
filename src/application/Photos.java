@@ -25,6 +25,13 @@ public class Photos implements Serializable{
 		
 	}
 	
+	public Photos(String pathtoImage)
+	{
+		this.pathtoImage = pathtoImage;
+		this.caption="";
+		this.tag=new ArrayList<Tag>();
+	}
+	
 	//sets fields of a new photo to be empty
 	public Photos()
 	{
@@ -45,5 +52,10 @@ public class Photos implements Serializable{
 	{
 		this.tag.add(tag);
 		
+	}
+	
+	public String toString()
+	{
+		return this.pathtoImage;
 	}
 }

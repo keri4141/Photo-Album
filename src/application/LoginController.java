@@ -87,7 +87,6 @@ public class LoginController {
         	for( int i=0;i<listofpeep.size();i++)
         	{
         		
-        		
         		if(listofpeep.get(i).toString().equals(usernamefield))
         		{
         			FXMLLoader loader = new FXMLLoader();
