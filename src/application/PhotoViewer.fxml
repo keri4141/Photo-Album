@@ -52,7 +52,7 @@
             </Label>
             <ScrollPane layoutX="15.0" layoutY="99.0" prefHeight="290.0" prefWidth="848.0">
                <content>
-                  <TilePane prefHeight="2000.0" prefWidth="830.0" />
+                  <TilePane fx:id="PHOTO_LIST" prefHeight="2000.0" prefWidth="830.0" />
                </content>
             </ScrollPane>
          </children>

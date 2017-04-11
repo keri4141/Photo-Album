@@ -12,12 +12,14 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.TilePane;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Pair;
@@ -27,6 +29,9 @@ public class PhotoController {
 
 	@FXML
 	private ListView<Photos> photolist;
+	
+	@FXML
+	private TilePane PHOTO_LIST;
 
 	private ObservableList<Photos> photos_ObservableLIST= FXCollections.observableArrayList();
 	
@@ -55,6 +60,26 @@ public class PhotoController {
        
        System.out.println("USER: " +userNAME+ " SELECTED ALBUM: "+ album_name);
 		
+       //POPULATE WITH IMAGES
+       //PHOTO_LIST.getChildren().add(new ImageView())
+       
+       /*
+        * May have to compare the pathname with the
+        * path in ImageView TilePanes with the
+        * pathname in the photos arraylist 
+        * 
+        * Image class holds the path name
+        * ImageView displays the images
+        * 
+        * Probably create a button that displays another window
+        * to display the captions / tags
+        * 
+        * 
+        * use pathname as identifier to display the correct
+        * caption and tags and date
+        */
+       
+       
 	}
 	
 	public void handleAddPhoto(ActionEvent e)
@@ -88,11 +113,12 @@ public class PhotoController {
 		       		   //add the album to matching username
 		       		   for(int j =0;j<albumlistLength;j++)
 		       			   {
-		       			   		if(FileHandler.fileofUsers.get(i).getAlbumList().get(j).toString().equals(album_name))
-		       			   		{
+		       			   		
+		       			   		if(FileHandler.fileofUsers.get(i).getAlbumList().get(j).toString().equals(album_name.toString()))
+		       			   		{	
 			       			   		FileHandler.fileofUsers.get(i).getAlbumList().get(j).setPhoto(new_photo);
 			       			   	 //test to see if it was added
-			 		       		   System.out.println("ALBUM: "+FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList());
+			 		       		   System.out.println("PHOTO: "+FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList());
 			       			   		break;
 		       			   		}
 		       			   		
