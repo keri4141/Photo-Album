@@ -81,7 +81,7 @@ public class LoginController {
 	        }
         else if("admin".equals(userField.getText())==false) //if its not admin then he typed something else
         {
-        	ArrayList listofpeep=(ArrayList) USERS; //typecast it into arraylist so I can loop easier
+        	ArrayList<User> listofpeep=(ArrayList<User>) USERS; //typecast it into arraylist so I can loop easier
         	String usernamefield=userField.getText();
         	
         	for( int i=0;i<listofpeep.size();i++)

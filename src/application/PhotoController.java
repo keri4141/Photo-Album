@@ -1,5 +1,7 @@
 package application;
 
+import java.io.File;
+import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,13 +15,16 @@ import javafx.geometry.Insets;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Pair;
@@ -31,15 +36,20 @@ public class PhotoController {
 	private ListView<Photos> photolist;
 	
 	@FXML
-	private TilePane PHOTO_LIST;
+	private ImageView PHOTO_LIST;
+	
+	@FXML
+	private TilePane PHOTO_PANE;
+	
 
 	private ObservableList<Photos> photos_ObservableLIST= FXCollections.observableArrayList();
 	
 	  List<User> USERS;
 	    String userNAME;
 	    Album album_name;
-	    
 	    String photo_path;
+	    
+	    boolean isalbumEmpty=false;
 	
 	public void start(Stage mainStage,String username, Album selected_album_name) throws ClassNotFoundException
 	{
@@ -61,6 +71,96 @@ public class PhotoController {
        System.out.println("USER: " +userNAME+ " SELECTED ALBUM: "+ album_name);
 		
        //POPULATE WITH IMAGES
+       
+       //CHECK IF EMPTY ALBUM
+  	 for(int i =0;i<USERS.size();i++)
+     {
+     	   if(USERS.get(i).toString().equals(userNAME))
+     	   {
+     		int albumlistLength=FileHandler.fileofUsers.get(i).getAlbumList().size();
+     		   //add the album to matching username
+     		   for(int j =0;j<albumlistLength;j++)
+     			   {
+     			   		
+     			   		if(FileHandler.fileofUsers.get(i).getAlbumList().get(j).toString().equals(album_name.toString()))
+     			   		{	
+     			   				//loop through photo list
+     			   			List<Photos> listofPaths=FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList();
+     			   			
+     			   				if(listofPaths.size()==0)
+     			   				{
+     			   					isalbumEmpty=true;
+     			   					break;
+     			   				}
+  	
+     			   		}
+     			   		
+     			   }
+ 
+     		break;
+     	   }
+     }
+       
+       
+       //ELSE ITS NOT EMPTY SO LOAD IMAGES
+       
+       if(isalbumEmpty==false)
+       {
+	  	 //FIND THE ALBUM TO PUT THE PHOTO IN
+			 for(int i =0;i<USERS.size();i++)
+		       {
+		       	   if(USERS.get(i).toString().equals(userNAME))
+		       	   {
+		       		int albumlistLength=FileHandler.fileofUsers.get(i).getAlbumList().size();
+		       		   //add the album to matching username
+		       		   for(int j =0;j<albumlistLength;j++)
+		       			   {
+		       			   		
+		       			   		if(FileHandler.fileofUsers.get(i).getAlbumList().get(j).toString().equals(album_name.toString()))
+		       			   		{	
+		       			   				//loop through photo list
+		       			   			List<Photos> listofPaths=FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList();
+		       			   			
+		       			   				for(int k =0;k<listofPaths.size();k++)
+		       			   				{
+		       			   					photo_path=listofPaths.get(k).toString();
+			       			   				ImageView imageView= new ImageView();
+					       			   		Image image = new Image(photo_path);
+	
+					       			    	imageView.setImage(image);
+					       			    	imageView.setFitHeight(110);
+					       			    	imageView.setFitWidth(110);
+					       			    	
+					       			    	PHOTO_PANE.getChildren().addAll(imageView); //adds image to tilepane
+					       			    	
+					       			    	imageView.setPickOnBounds(true);
+		       			   				}
+		       			   				break;		
+		       			   		}
+		       			   		
+		       			   } //end of album loop
+		   
+		       		break;
+		       	   }
+		       }
+       	} //END OF CHECK IF ALBUM IS EMPTY
+		 
+		//this is to make imageView clickable
+	    	ObservableList<Node> childNode = PHOTO_PANE.getChildren();
+
+	    	for(int i = 0; i < childNode.size(); i++)
+	    	{
+	    		Node temp1 = childNode.get(i);
+	    		temp1.setOnMouseClicked(Event -> {
+
+	    			//imageSelect((ImageView) temp1);
+
+	    			System.out.println("got it");
+	    		});
+	    	}
+       
+       
+       
        //PHOTO_LIST.getChildren().add(new ImageView())
        
        /*
@@ -84,7 +184,7 @@ public class PhotoController {
 	
 	public void handleAddPhoto(ActionEvent e)
 	{
-		dialog();
+		//dialog();
 		
 		 if("".equals(photo_path))
          {
@@ -102,9 +202,50 @@ public class PhotoController {
 		  */
 		 else{
 			
+			 
+			 FileChooser fileChooser = new FileChooser();
+				fileChooser.setTitle("Select Image File");
+				fileChooser.getExtensionFilters().addAll(
+						new FileChooser.ExtensionFilter("Image Files",
+								"*.bmp", "*.png", "*.jpg", "*.gif")); 
+				File selectedFile = fileChooser.showOpenDialog(null);
+				
+				
+				ImageView imageView= new ImageView();
+				
+				try {
+		    		photo_path = selectedFile.toURI().toURL().toString();
+		    	} catch (MalformedURLException e1) {
+		    		// TODO Auto-generated catch block
+		    		e1.printStackTrace();
+		    	}
+		    	Image image = new Image(photo_path);
+		    	imageView.setImage(image);
+		    	imageView.setFitHeight(110);
+		    	imageView.setFitWidth(110);
+		    	
+		    	PHOTO_PANE.getChildren().addAll(imageView); //adds image to tilepane
+		    	
+		    	imageView.setPickOnBounds(true);
+
+		    	//this is to make imageView clickable
+		    	ObservableList<Node> childNode = PHOTO_PANE.getChildren();
+
+		    	for(int i = 0; i < childNode.size(); i++)
+		    	{
+		    		Node temp1 = childNode.get(i);
+		    		temp1.setOnMouseClicked(Event -> {
+
+		    			//imageSelect((ImageView) temp1);
+
+		    			System.out.println("got it");
+		    		});
+		    	}
+		    	
 			 Photos new_photo = new Photos(photo_path);
 			 
 			 
+			 //FIND THE ALBUM TO PUT THE PHOTO IN
 			 for(int i =0;i<USERS.size();i++)
 		       {
 		       	   if(USERS.get(i).toString().equals(userNAME))
@@ -128,9 +269,9 @@ public class PhotoController {
 		       		  
 		       		   
 		       		   //add to observable list
-		       		   photos_ObservableLIST.add(new_photo);
+		       		//   photos_ObservableLIST.add(new_photo);
 		       		//add to the list view
-		       		photolist.setItems(photos_ObservableLIST);
+		       		//photolist.setItems(photos_ObservableLIST);
 		       		
 		       		FileHandler.WriteFile();
 		       		break;
@@ -139,7 +280,13 @@ public class PhotoController {
 		 }
 		
 	}
-	
+	/*
+	public void imageSelect(ImageView imageview)
+	{
+		int imageIndex = PHOTO_PANE.getChildren().indexOf(imageview);
+		
+		Photos imagePhoto = PhotoList.get(imageIndex);
+	}*/
 	public void handleDeletePhoto(ActionEvent e)
 	{
 		

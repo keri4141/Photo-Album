@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.text.Font?>
@@ -52,7 +53,10 @@
             </Label>
             <ScrollPane layoutX="15.0" layoutY="99.0" prefHeight="290.0" prefWidth="848.0">
                <content>
-                  <TilePane fx:id="PHOTO_LIST" prefHeight="2000.0" prefWidth="830.0" />
+                  <TilePane fx:id="PHOTO_PANE" prefHeight="2000.0" prefWidth="825.0">
+                     <children>
+                        <ImageView fx:id="PHOTO_LIST" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                     </children></TilePane>
                </content>
             </ScrollPane>
          </children>
