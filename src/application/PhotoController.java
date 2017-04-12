@@ -57,17 +57,27 @@ public class PhotoController {
 	
 
 	private ObservableList<Tag> tags_ObservableLIST= FXCollections.observableArrayList();
-	Photos imagePhoto;
+	
 	  List<User> USERS;
 	  List<Photos> photolist= new ArrayList<Photos>();
 	    String userNAME;
 	    Album album_name;
 	    String photo_path;
+	    
+	    /*To hold the input from the Tag dialog input box*/
 	    String TagName="";
 	    String TagValue="";
+	    
+	    /*Variables used for selecting images */
+	    Photos imagePhoto;
 	    String selected_photo="";
 	    ImageView selected_image_view=null;
+	    
+	    /* MOVE AND COPY TO ALBUM VARIABLES */
 	    String movetoAlbum="";
+	    String copytoAlbum="";
+	    
+	    /*This is used to check if the album is empty before loading the images upon starting the photoviewer */
 	    boolean isalbumEmpty=false;
 	
 	public void start(Stage mainStage,String username, Album selected_album_name) throws ClassNotFoundException
@@ -802,14 +812,31 @@ public class PhotoController {
 		dialog.setContentText("Move to Album: ");
 		
 		Optional<String> result = dialog.showAndWait();
-		movetoAlbum=result.get();
-		
-		
-		
+		movetoAlbum=result.get();	
 
 	}
 	
-	
+	public void dialogCopyPhoto()
+	{
+		if(selected_photo.equals("")==true)
+		{
+			 Alert alert =
+                     new Alert(Alert.AlertType.INFORMATION);
+             alert.setContentText("You must select a photo first!");
+             alert.showAndWait();
+             
+             return;   	
+		}
+		
+		
+		TextInputDialog dialog = new TextInputDialog("");
+		dialog.setTitle("Copy Photo");
+		dialog.setHeaderText("Copy Photo");
+		dialog.setContentText("Copy to Album: ");
+		
+		Optional<String> result = dialog.showAndWait();
+		copytoAlbum=result.get();	
 
-	
+	}
+
 }
