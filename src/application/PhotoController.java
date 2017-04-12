@@ -26,6 +26,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -36,6 +37,9 @@ import javafx.util.Pair;
 
 
 public class PhotoController {
+	
+	@FXML
+	private TextArea captiontextArea;
 
 	@FXML
 	private ListView<Tag> tags;
@@ -110,7 +114,17 @@ public class PhotoController {
      	   }
      }
        
-       
+  	 /*
+  	  * When loading up the photoview it will instantly set the caption textarea to be not visible
+  	  * When an image is clicked, the visilbity value will be set to true
+  	  *  
+  	  */
+  	 if(selected_image_view==null)
+  	 {
+  		captiontextArea.setVisible(false);
+  	 }
+  	 
+  	 
        //ELSE ITS NOT EMPTY SO LOAD IMAGES
        
        if(isalbumEmpty==false)
@@ -175,53 +189,13 @@ public class PhotoController {
 	     * so go into imageSelect when an image is selected i would want to compare the photo selected with the user list
 	     * 
 	     */
-	    	/*
-
-			 for(int i =0;i<USERS.size();i++)
-		       {
-		       	   if(USERS.get(i).toString().equals(userNAME))
-		       	   {
-		       		int albumlistLength=FileHandler.fileofUsers.get(i).getAlbumList().size();
-		       		   //add the album to matching username
-		       		   for(int j =0;j<albumlistLength;j++)
-		       			   {
-		       			   		
-		       			   		if(FileHandler.fileofUsers.get(i).getAlbumList().get(j).toString().equals(album_name.toString()))
-		       			   		{	
-		       			   				//loop through photo list
-		       			   			photolist=FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList();
-		       			   				for(int k =0;k<photolist.size();k++)
-		       			   				{
-		       			   					photo_path=photolist.get(k).toString();
-		       			   					
-			       			   				if(photo_path.equals(selected_photo))
-			       			   				{
-			       			   					FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList().remove(k);
-			       			   					PHOTO_PANE.getChildren().remove(selected_image_view);
-			       			   				break;
-			       			   				}
-			       			   				
-		       			   				}
-		       			   				break;		
-		       			   		}
-		       			   		
-		       			   } //end of album loop
-		   
-		       		break;
-		       	   }
-		       }*/
 	    	
-	    	  //users.addAll(FileHandler.fileofUsers);
-	          
-	          //userlist.setItems(users);
-       
 
 	}
 	
 	public void handleAddPhoto(ActionEvent e)
 	{
-		//dialog();
-		
+	
 		 if("".equals(photo_path))
          {
              Alert alert =
@@ -360,6 +334,9 @@ public class PhotoController {
     		 tags_ObservableLIST.addAll(imagePhoto.getTagList());
     		//add to the list view
     		tags.setItems(tags_ObservableLIST);
+    		
+    		captiontextArea.setVisible(true);
+    		captiontextArea.setText(imagePhoto.getCaption());
     		
 		selected_image_view=imageview;
 		selected_photo=imagePhoto.toString();
@@ -556,6 +533,115 @@ public class PhotoController {
        		tags.setItems(tags_ObservableLIST);
 			
 		}
+	}
+	
+	
+	public void handleDeleteTag(ActionEvent e)
+	{
+		Tag tag = tags.getSelectionModel().getSelectedItem();
+
+        int nextIndex = tags.getSelectionModel().getSelectedIndex() + 1;
+
+        //Selected song is not the last one
+        if(nextIndex != tags_ObservableLIST.size()){
+            tags.getSelectionModel().select(nextIndex);
+        }
+
+        tags_ObservableLIST.remove(tag);
+      
+        
+    	for(int i =0;i<USERS.size();i++)
+	       {
+	       	   if(USERS.get(i).toString().equals(userNAME))
+	       	   {
+	       		int albumlistLength=FileHandler.fileofUsers.get(i).getAlbumList().size();
+	       		   //add the album to matching username
+	       		   for(int j =0;j<albumlistLength;j++)
+	       			   {
+	       			   		if(FileHandler.fileofUsers.get(i).getAlbumList().get(j).toString().equals(album_name.toString()))
+	       			   		{	
+	       			   				//loop through photo list
+	       			   			photolist=FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList();
+	       			   				for(int k =0;k<photolist.size();k++)
+	       			   				{
+	       			   					photo_path=photolist.get(k).toString();
+	       			   					
+		       			   				if(photo_path.equals(selected_photo))
+		       			   				{	
+		       			   					//
+		       			   					
+		       			   					FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList().get(k).getTagList().remove(tag);
+		       			   					//stem.out.println(FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList().get(k).getTagList());
+		       			   				break;
+		       			   				}
+		       			   				
+	       			   				}
+	       			   				break;		
+	       			   		}
+	       			   		
+	       			   } //end of album loop
+	   
+	       		break;
+	       	   }
+	       }
+        
+        //leHandler.fileofUsers.remove(person);
+        FileHandler.WriteFile();
+		
+	}
+	
+	
+	public void handleSaveCaption(ActionEvent e)
+	{
+		if(imagePhoto.equals(null))
+		{
+			System.out.println("YO PICK A PHOTO FIRST");
+			return;
+		}
+		
+		else
+		{
+			imagePhoto.setCaption(captiontextArea.getText());
+			
+			 
+	    	for(int i =0;i<USERS.size();i++)
+		       {
+		       	   if(USERS.get(i).toString().equals(userNAME))
+		       	   {
+		       		int albumlistLength=FileHandler.fileofUsers.get(i).getAlbumList().size();
+		       		   //add the album to matching username
+		       		   for(int j =0;j<albumlistLength;j++)
+		       			   {
+		       			   		if(FileHandler.fileofUsers.get(i).getAlbumList().get(j).toString().equals(album_name.toString()))
+		       			   		{	
+		       			   				//loop through photo list
+		       			   			photolist=FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList();
+		       			   				for(int k =0;k<photolist.size();k++)
+		       			   				{
+		       			   					photo_path=photolist.get(k).toString();
+		       			   					
+			       			   				if(photo_path.equals(selected_photo))
+			       			   				{	
+			       			   					//
+			       			   					
+			       			   					FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList().get(k).setCaption(captiontextArea.getText());;
+			       			   					//stem.out.println(FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList().get(k).getTagList());
+			       			   				break;
+			       			   				}
+			       			   				
+		       			   				}
+		       			   				break;		
+		       			   		}
+		       			   		
+		       			   } //end of album loop
+		   
+		       		break;
+		       	   }
+		       }
+	    	  FileHandler.WriteFile();
+			// it def saves it into the photo System.out.println(imagePhoto.getCaption());
+		}
+		
 	}
 	
 	

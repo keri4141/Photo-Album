@@ -17,8 +17,8 @@
             <Button fx:id="addPhoto" layoutX="60.0" layoutY="423.0" mnemonicParsing="false" onAction="#handleAddPhoto" text="Add Photo" />
             <Button fx:id="deletePhoto" layoutX="289.0" layoutY="423.0" mnemonicParsing="false" onAction="#handleDeletePhoto" prefHeight="27.0" prefWidth="98.0" text="Delete Photo" />
             <Button onAction="#handleAddTag" layoutX="605.0" layoutY="747.0" mnemonicParsing="false" text="Add Tag" />
-            <Button layoutX="734.0" layoutY="747.0" mnemonicParsing="false" text="Delete Tag" />
-            <Button layoutX="196.0" layoutY="747.0" mnemonicParsing="false" text="Edit Caption" />
+            <Button onAction="#handleDeleteTag" layoutX="734.0" layoutY="747.0" mnemonicParsing="false" text="Delete Tag" />
+            <Button onAction="#handleSaveCaption" layoutX="196.0" layoutY="747.0" mnemonicParsing="false" text="Save Caption" />
             <Button layoutX="550.0" layoutY="423.0" mnemonicParsing="false" text="Copy Photo" />
             <Button layoutX="777.0" layoutY="423.0" mnemonicParsing="false" text="Move Photo" />
             <Button onAction="#handleBack" layoutX="15.0" layoutY="26.0" mnemonicParsing="false" text="Back to Albums" />
@@ -35,7 +35,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextArea layoutX="40.0" layoutY="516.0" prefHeight="207.0" prefWidth="404.0" />
+            <TextArea fx:id="captiontextArea" layoutX="40.0" layoutY="516.0" prefHeight="207.0" prefWidth="404.0" />
             <Label layoutX="207.0" layoutY="494.0" text="Caption">
                <font>
                   <Font size="19.0" />
