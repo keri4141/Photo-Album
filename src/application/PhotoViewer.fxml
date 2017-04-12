@@ -20,7 +20,7 @@
             <Button onAction="#handleDeleteTag" layoutX="734.0" layoutY="747.0" mnemonicParsing="false" text="Delete Tag" />
             <Button onAction="#handleSaveCaption" layoutX="196.0" layoutY="747.0" mnemonicParsing="false" text="Save Caption" />
             <Button layoutX="550.0" layoutY="423.0" mnemonicParsing="false" text="Copy Photo" />
-            <Button layoutX="777.0" layoutY="423.0" mnemonicParsing="false" text="Move Photo" />
+            <Button onAction="#handleMovePhoto" layoutX="777.0" layoutY="423.0" mnemonicParsing="false" text="Move Photo" />
             <Button onAction="#handleBack" layoutX="15.0" layoutY="26.0" mnemonicParsing="false" text="Back to Albums" />
             <Button layoutX="819.0" layoutY="26.0" mnemonicParsing="false" text="Quit" />
             <Button layoutX="400.0" layoutY="26.0" mnemonicParsing="false" text="View as Slideshow" />

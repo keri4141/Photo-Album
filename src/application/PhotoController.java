@@ -411,11 +411,7 @@ public class PhotoController {
 		fn.setPromptText("Tag Name");
 		TextField ln=new TextField();
 		ln.setPromptText("Tag Value");
-		
-		
-		
-		
-		
+	
 		grid.add(new Label("Tag Name: "),0,0);
 		grid.add(fn, 1, 0);
 		grid.add(new Label("Tag Value: "), 0, 1);
@@ -593,9 +589,12 @@ public class PhotoController {
 	
 	public void handleSaveCaption(ActionEvent e)
 	{
-		if(imagePhoto.equals(null))
+		if(selected_photo.equals("")==true)
 		{
-			System.out.println("YO PICK A PHOTO FIRST");
+			 Alert alert =
+                     new Alert(Alert.AlertType.INFORMATION);
+             alert.setContentText("You must select a photo first!");
+             alert.showAndWait();
 			return;
 		}
 		
@@ -641,6 +640,18 @@ public class PhotoController {
 	    	  FileHandler.WriteFile();
 			// it def saves it into the photo System.out.println(imagePhoto.getCaption());
 		}
+		
+	}
+	
+	
+	public void handleMovePhoto(ActionEvent e)
+	{
+		
+	}
+	
+	
+	public void dialogMovePhoto()
+	{
 		
 	}
 	
