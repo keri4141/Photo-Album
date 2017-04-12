@@ -2,6 +2,7 @@ package application;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 
 public class Photos implements Serializable{
@@ -11,7 +12,7 @@ public class Photos implements Serializable{
 	 */
 	private static final long serialVersionUID = -501614198631312081L;
 	private String caption;
-	private ArrayList<Tag>tag;
+	private List<Tag> tag;
 	private boolean isStock;
 	private String pathtoImage;
 	private Calendar date;
@@ -52,6 +53,11 @@ public class Photos implements Serializable{
 	{
 		this.tag.add(tag);
 		
+	}
+	
+	public List<Tag> getTagList()
+	{
+		return this.tag;
 	}
 	
 	public String toString()

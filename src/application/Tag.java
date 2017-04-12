@@ -11,6 +11,11 @@ public class Tag implements Serializable{
 	private String tagValue;
 	
 	
+	public Tag(String tagName, String tagValue)
+	{
+		this.tagName=tagName;
+		this.tagValue=tagValue;
+	}
 	public String toString()
 	{
 		return this.tagName+": "+this.tagValue;

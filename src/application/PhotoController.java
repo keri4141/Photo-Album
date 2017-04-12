@@ -47,7 +47,7 @@ public class PhotoController {
 	private TilePane PHOTO_PANE;
 	
 
-	private ObservableList<Photos> photos_ObservableLIST= FXCollections.observableArrayList();
+	private ObservableList<Tag> tags_ObservableLIST= FXCollections.observableArrayList();
 	
 	  List<User> USERS;
 	  List<Photos> photolist= new ArrayList<Photos>();
@@ -167,6 +167,13 @@ public class PhotoController {
 	    			System.out.println("got: "+selected_photo);
 	    		});
 	    	}
+	    	
+	    	
+	    //display tags
+	    
+	    	  //users.addAll(FileHandler.fileofUsers);
+	          
+	          //userlist.setItems(users);
        
 
 	}
@@ -257,9 +264,9 @@ public class PhotoController {
 		      
 		       		   
 		       		   //add to observable list
-		       		//   photos_ObservableLIST.add(new_photo);
+		       		//   tags_ObservableLIST.add(tag);
 		       		//add to the list view
-		       		//photolist.setItems(photos_ObservableLIST);
+		       		//tags.setItems(tags_ObservableLIST);
 		       		
 		       		FileHandler.WriteFile();
 		       		break;
@@ -272,6 +279,31 @@ public class PhotoController {
 	public void imageSelect(ImageView imageview)
 	{
 		int imageIndex = PHOTO_PANE.getChildren().indexOf(imageview);
+		
+		 for(int i =0;i<USERS.size();i++)
+	       {
+	       	   if(USERS.get(i).toString().equals(userNAME))
+	       	   {
+	       		int albumlistLength=FileHandler.fileofUsers.get(i).getAlbumList().size();
+	       		   //add the album to matching username
+	       		   for(int j =0;j<albumlistLength;j++)
+	       			   {
+	       			   		
+	       			   		if(FileHandler.fileofUsers.get(i).getAlbumList().get(j).toString().equals(album_name.toString()))
+	       			   		{	
+		       			   		
+		       			   		//photolist.add(new_photo);
+		       			   	 //test to see if it was added
+		 		       		  photolist=FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList();
+		       			   		break;
+	       			   		}
+	       			   		
+	       			   }
+	     
+	       		break;
+	       	   }
+	       }
+		 
 		//imageIndex starts from 1
 		Photos imagePhoto = photolist.get(imageIndex-1);
 		selected_image_view=imageview;
@@ -424,6 +456,49 @@ public class PhotoController {
 	             return;   	
 			}
 			
+			//remember to reset tagvalue and tag name
+			
+			Tag tag= new Tag(TagName,TagValue);
+			
+			
+			for(int i =0;i<USERS.size();i++)
+		       {
+		       	   if(USERS.get(i).toString().equals(userNAME))
+		       	   {
+		       		int albumlistLength=FileHandler.fileofUsers.get(i).getAlbumList().size();
+		       		   //add the album to matching username
+		       		   for(int j =0;j<albumlistLength;j++)
+		       			   {
+		       			   		if(FileHandler.fileofUsers.get(i).getAlbumList().get(j).toString().equals(album_name.toString()))
+		       			   		{	
+		       			   				//loop through photo list
+		       			   			photolist=FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList();
+		       			   				for(int k =0;k<photolist.size();k++)
+		       			   				{
+		       			   					photo_path=photolist.get(k).toString();
+		       			   					
+			       			   				if(photo_path.equals(selected_photo))
+			       			   				{	
+			       			   					//
+			       			   					FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList().get(k).setTag(tag);
+			       			   					System.out.println(FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList().get(k).getTagList());
+			       			   				break;
+			       			   				}
+			       			   				
+		       			   				}
+		       			   				break;		
+		       			   		}
+		       			   		
+		       			   } //end of album loop
+		   
+		       		break;
+		       	   }
+		       }
+			
+			  //add to observable list
+       		   tags_ObservableLIST.add(tag);
+       		//add to the list view
+       		tags.setItems(tags_ObservableLIST);
 			
 		}
 	}
