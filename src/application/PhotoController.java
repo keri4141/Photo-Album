@@ -22,6 +22,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
@@ -45,6 +46,9 @@ public class PhotoController {
 	
 	@FXML
 	private TextArea captiontextArea;
+	
+	@FXML
+	private Button saveCaption;
 
 	@FXML
 	private ListView<Tag> tags;
@@ -138,6 +142,7 @@ public class PhotoController {
   	 if(selected_image_view==null)
   	 {
   		captiontextArea.setVisible(false);
+  		saveCaption.setVisible(false);
   	 }
   	 
   	 
@@ -359,6 +364,7 @@ public class PhotoController {
     		tags.setItems(tags_ObservableLIST);
     		
     		captiontextArea.setVisible(true);
+    		saveCaption.setVisible(true);
     		captiontextArea.setText(imagePhoto.getCaption());
     		
 		selected_image_view=imageview;
@@ -551,7 +557,7 @@ public class PhotoController {
        		   tags_ObservableLIST.add(tag);
        		//add to the list view
        		tags.setItems(tags_ObservableLIST);
-			
+			FileHandler.WriteFile();
 		}
 	}
 	
