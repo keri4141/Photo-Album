@@ -48,7 +48,7 @@ public class PhotoController {
 	
 
 	private ObservableList<Tag> tags_ObservableLIST= FXCollections.observableArrayList();
-	
+	Photos imagePhoto;
 	  List<User> USERS;
 	  List<Photos> photolist= new ArrayList<Photos>();
 	    String userNAME;
@@ -170,7 +170,47 @@ public class PhotoController {
 	    	
 	    	
 	    //display tags
-	    
+	    /*
+	     * when an image is clicked it should display the tags
+	     * so go into imageSelect when an image is selected i would want to compare the photo selected with the user list
+	     * 
+	     */
+	    	/*
+
+			 for(int i =0;i<USERS.size();i++)
+		       {
+		       	   if(USERS.get(i).toString().equals(userNAME))
+		       	   {
+		       		int albumlistLength=FileHandler.fileofUsers.get(i).getAlbumList().size();
+		       		   //add the album to matching username
+		       		   for(int j =0;j<albumlistLength;j++)
+		       			   {
+		       			   		
+		       			   		if(FileHandler.fileofUsers.get(i).getAlbumList().get(j).toString().equals(album_name.toString()))
+		       			   		{	
+		       			   				//loop through photo list
+		       			   			photolist=FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList();
+		       			   				for(int k =0;k<photolist.size();k++)
+		       			   				{
+		       			   					photo_path=photolist.get(k).toString();
+		       			   					
+			       			   				if(photo_path.equals(selected_photo))
+			       			   				{
+			       			   					FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList().remove(k);
+			       			   					PHOTO_PANE.getChildren().remove(selected_image_view);
+			       			   				break;
+			       			   				}
+			       			   				
+		       			   				}
+		       			   				break;		
+		       			   		}
+		       			   		
+		       			   } //end of album loop
+		   
+		       		break;
+		       	   }
+		       }*/
+	    	
 	    	  //users.addAll(FileHandler.fileofUsers);
 	          
 	          //userlist.setItems(users);
@@ -278,6 +318,14 @@ public class PhotoController {
 	
 	public void imageSelect(ImageView imageview)
 	{
+		
+		//should clear the listview
+		tags_ObservableLIST.removeAll(tags_ObservableLIST);		
+		
+		
+		//then update it again
+		
+		
 		int imageIndex = PHOTO_PANE.getChildren().indexOf(imageview);
 		
 		 for(int i =0;i<USERS.size();i++)
@@ -305,7 +353,14 @@ public class PhotoController {
 	       }
 		 
 		//imageIndex starts from 1
-		Photos imagePhoto = photolist.get(imageIndex-1);
+		 
+		 imagePhoto = photolist.get(imageIndex-1);
+		 
+		  //add to observable list
+    		 tags_ObservableLIST.addAll(imagePhoto.getTagList());
+    		//add to the list view
+    		tags.setItems(tags_ObservableLIST);
+    		
 		selected_image_view=imageview;
 		selected_photo=imagePhoto.toString();
 	}
