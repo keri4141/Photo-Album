@@ -1,7 +1,9 @@
 package application;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,11 +13,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
@@ -45,10 +50,12 @@ public class PhotoController {
 	private ObservableList<Photos> photos_ObservableLIST= FXCollections.observableArrayList();
 	
 	  List<User> USERS;
-	  List<Photos> photolist;
+	  List<Photos> photolist= new ArrayList<Photos>();
 	    String userNAME;
 	    Album album_name;
 	    String photo_path;
+	    String TagName="";
+	    String TagValue="";
 	    String selected_photo="";
 	    ImageView selected_image_view=null;
 	    boolean isalbumEmpty=false;
@@ -240,7 +247,7 @@ public class PhotoController {
 		       			   		if(FileHandler.fileofUsers.get(i).getAlbumList().get(j).toString().equals(album_name.toString()))
 		       			   		{	
 			       			   		FileHandler.fileofUsers.get(i).getAlbumList().get(j).setPhoto(new_photo);
-			       			   		photolist.add(new_photo);
+			       			   		//photolist.add(new_photo);
 			       			   	 //test to see if it was added
 			 		       		   System.out.println("PHOTO: "+FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList());
 			       			   		break;
@@ -307,7 +314,9 @@ public class PhotoController {
 			       			   				{
 			       			   					FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList().remove(k);
 			       			   					PHOTO_PANE.getChildren().remove(selected_image_view);
+			       			   				break;
 			       			   				}
+			       			   				
 		       			   				}
 		       			   				break;		
 		       			   		}
@@ -362,6 +371,27 @@ public class PhotoController {
 
 		
 	}
+	
+	public void handleBack(ActionEvent e) throws IOException, ClassNotFoundException
+	{
+		FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("UserSubsystem.fxml"));
+        Parent root = (Parent) loader.load();
+    		//Parent home_page_parent=FXMLLoader.load(getClass().getResource("AdminSubsystem.fxml"));
+    		Scene home_page_scene=new Scene(root);
+    		Stage app_stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+    	
+    		app_stage.hide();
+    		app_stage.setScene(home_page_scene);
+    		
+    		AlbumController albumcontrol =loader.getController();
+    		
+    		app_stage.show();
+    		albumcontrol.start(app_stage,userNAME);
+		
+	}
+	
+	
 
 	
 }
