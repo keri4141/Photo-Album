@@ -16,7 +16,7 @@
          <children>
             <Button fx:id="addPhoto" layoutX="60.0" layoutY="423.0" mnemonicParsing="false" onAction="#handleAddPhoto" text="Add Photo" />
             <Button fx:id="deletePhoto" layoutX="289.0" layoutY="423.0" mnemonicParsing="false" onAction="#handleDeletePhoto" prefHeight="27.0" prefWidth="98.0" text="Delete Photo" />
-            <Button layoutX="605.0" layoutY="747.0" mnemonicParsing="false" text="Add Tag" />
+            <Button onAction="#handleAddTag" layoutX="605.0" layoutY="747.0" mnemonicParsing="false" text="Add Tag" />
             <Button layoutX="734.0" layoutY="747.0" mnemonicParsing="false" text="Delete Tag" />
             <Button layoutX="196.0" layoutY="747.0" mnemonicParsing="false" text="Edit Caption" />
             <Button layoutX="550.0" layoutY="423.0" mnemonicParsing="false" text="Copy Photo" />

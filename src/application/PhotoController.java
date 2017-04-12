@@ -281,6 +281,7 @@ public class PhotoController {
 	
 	public void handleDeletePhoto(ActionEvent e)
 	{
+		
 		if(selected_photo.equals("")==true)
 		{
 			 Alert alert =
@@ -329,11 +330,11 @@ public class PhotoController {
 		}
 	}
 	
-	public void dialog()
+	public void Tagdialog()
 	{
 		Dialog<String> dialog = new Dialog<>();
-		dialog.setTitle("Add Yo path to image");
-		dialog.setHeaderText("Enter your name");
+		dialog.setTitle("Add Tags");
+		dialog.setHeaderText("Enter the Tags");
 		ButtonType logButton = new ButtonType("Add", ButtonData.OK_DONE);
 		dialog.getDialogPane().getButtonTypes().addAll(logButton,ButtonType.CANCEL);
 		
@@ -343,14 +344,18 @@ public class PhotoController {
 		grid.setVgap(10);
 		grid.setPadding(new Insets(20,15,10,10));
 		TextField fn= new TextField();
-		fn.setPromptText("Image Path");
+		fn.setPromptText("Tag Name");
+		TextField ln=new TextField();
+		ln.setPromptText("Tag Value");
 		
 		
 		
 		
 		
-		grid.add(new Label("Image Path: "),0,0);
+		grid.add(new Label("Tag Name: "),0,0);
 		grid.add(fn, 1, 0);
+		grid.add(new Label("Tag Value: "), 0, 1);
+		grid.add(ln, 1, 1);
 		
 		
 		
@@ -367,7 +372,10 @@ public class PhotoController {
 		
 		Optional<String> result = dialog.showAndWait();
 		
-		photo_path=result.get();
+		TagName=fn.getText();
+		TagValue=ln.getText();
+		System.out.println(TagName);
+		System.out.println(TagValue);
 
 		
 	}
@@ -389,6 +397,35 @@ public class PhotoController {
     		app_stage.show();
     		albumcontrol.start(app_stage,userNAME);
 		
+	}
+	
+	public void handleAddTag(ActionEvent e)
+	{
+		if(selected_photo.equals("")==true)
+		{
+			 Alert alert =
+                     new Alert(Alert.AlertType.INFORMATION);
+             alert.setContentText("You must select a photo first!");
+             alert.showAndWait();
+             
+             return;   	
+		}
+		else
+		{
+			Tagdialog();
+			
+			if(TagName.equals("")==true && TagValue.equals("")==true)
+			{
+				 Alert alert =
+	                     new Alert(Alert.AlertType.INFORMATION);
+	             alert.setContentText("You must enter both Tag Name and Value!");
+	             alert.showAndWait();
+	             
+	             return;   	
+			}
+			
+			
+		}
 	}
 	
 	
