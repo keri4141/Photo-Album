@@ -28,6 +28,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -35,7 +36,11 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Pair;
 
-
+/*
+ * AN EXISTING BUG, SAME PHOTOS IN SAME ALBUM, no way to detect uniqueness between them, remove removes the first occurence
+ * it doesnt remove a specific one
+ * msut do a check on not just the pathname, but also the caption and tags to find uniqunes of photos
+ */
 public class PhotoController {
 	
 	@FXML
@@ -62,6 +67,7 @@ public class PhotoController {
 	    String TagValue="";
 	    String selected_photo="";
 	    ImageView selected_image_view=null;
+	    String movetoAlbum="";
 	    boolean isalbumEmpty=false;
 	
 	public void start(Stage mainStage,String username, Album selected_album_name) throws ClassNotFoundException
@@ -224,7 +230,14 @@ public class PhotoController {
 				ImageView imageView= new ImageView();
 				
 				try {
+					if(selectedFile==null)
+					{
+						return;
+					}
+					else
+					{
 		    		photo_path = selectedFile.toURI().toURL().toString();
+					}
 		    	} catch (MalformedURLException e1) {
 		    		// TODO Auto-generated catch block
 		    		e1.printStackTrace();
@@ -379,6 +392,7 @@ public class PhotoController {
 			       			   				{
 			       			   					FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList().remove(k);
 			       			   					PHOTO_PANE.getChildren().remove(selected_image_view);
+			       			   					FileHandler.WriteFile();
 			       			   				break;
 			       			   				}
 			       			   				
@@ -646,13 +660,153 @@ public class PhotoController {
 	
 	public void handleMovePhoto(ActionEvent e)
 	{
+		dialogMovePhoto();
+		
+		
+		//if no input was placed
+		if(movetoAlbum.equals("")==true)
+		{
+			
+				 Alert alert =
+	                     new Alert(Alert.AlertType.INFORMATION);
+	             alert.setContentText("You didn't choose an album to move the photo");
+	             alert.showAndWait();
+				return;
+			
+		}
+		
+		//if its the same album 
+		else if(movetoAlbum.equals(album_name.toString())==true)
+		{
+				 Alert alert =
+	                     new Alert(Alert.AlertType.INFORMATION);
+	             alert.setContentText("You can't move the photo to the same album!");
+	             alert.showAndWait();
+				return;
+			
+		}
+		
+		else
+		{
+			//movetoAlbum is the album that i wanna move to
+			//album_name is the current album
+			
+			/*
+			 * check if the albumname exists first
+			 * loop through to to get to the users albumlist
+			 * then use a contain to see if the album is in that list or not
+			 */
+		
+			for(int i =0;i<USERS.size();i++)
+			{
+				if(USERS.get(i).toString().equals(userNAME))
+				{
+					//if album doesnt exist in the albumlist
+					if(FileHandler.fileofUsers.get(i).getAlbumList().toString().contains(movetoAlbum)==false)
+					{
+						Alert alert =
+			                     new Alert(Alert.AlertType.INFORMATION);
+			             alert.setContentText("That album doesn't exist");
+			             alert.showAndWait();
+			             
+						return;
+					}
+					
+					//album exists
+					else
+					{
+						
+				       		int albumlistLength=FileHandler.fileofUsers.get(i).getAlbumList().size();
+				       		Album phototoAlbum=null;
+				       		Album current_photoAlbum=null;
+				       		//loop to find the album that to move the photo to
+				       		for(int n =0;n<albumlistLength;n++)
+				       		{
+				       			if(FileHandler.fileofUsers.get(i).getAlbumList().get(n).toString().equals(movetoAlbum))
+				       			{
+				       				phototoAlbum=FileHandler.fileofUsers.get(i).getAlbumList().get(n);
+				       				System.out.println("MOVING TO: "+phototoAlbum);
+				       				break;
+				       			}
+				       		}
+				       		
+				       		   //find the album that the current one is in
+				       		   for(int j =0;j<albumlistLength;j++)
+				       			   {
+				       			   	//if the album is equal to the current album
+				       			   		if(FileHandler.fileofUsers.get(i).getAlbumList().get(j).toString().equals(album_name.toString()))
+				       			   		{	
+				       			   				
+				       			   			current_photoAlbum=FileHandler.fileofUsers.get(i).getAlbumList().get(j);	
+				       			   			System.out.println("Current Album: "+current_photoAlbum);
+				       			   				break;		
+				       			   		}
+				       			   		
+				       			   } //end of album loop
+				       		   
+				       		   /*
+				       		    * I have the two albums now
+				       		    * remove the album from the current album and insert the photo to the designated album
+				       		    * loop through the current album to find the photo, remove it and add it to the new one
+				       		    */
+				       		   
+				       		   //REMOVE PHOTO FROM CURRENT ALBUM
+				       		   for(int z =0;z<current_photoAlbum.getPhotoList().size();z++)
+				       		   {
+				       			   if(current_photoAlbum.getPhotoList().get(z).toString().equals(imagePhoto.toString()))
+				       					   
+				       					   {
+				       				   			current_photoAlbum.getPhotoList().remove(imagePhoto);
+			       			   					PHOTO_PANE.getChildren().remove(selected_image_view);
+
+				       				   			break;
+				       				
+				       					   }		      
+				       		   }
+				       		   
+				       		   //add the photo to the THE NEW ALBUM
+				       		   phototoAlbum.getPhotoList().add(imagePhoto);
+				       		   
+				   
+				       		break;
+				       	   
+					} //end of album exists
+					
+					
+				}//end of username is equal to logged in user
+			}//end of for loop for username
+			
+			FileHandler.WriteFile();
+			
+		}//end of else
 		
 	}
 	
 	
 	public void dialogMovePhoto()
 	{
+		if(selected_photo.equals("")==true)
+		{
+			 Alert alert =
+                     new Alert(Alert.AlertType.INFORMATION);
+             alert.setContentText("You must select a photo first!");
+             alert.showAndWait();
+             
+             return;   	
+		}
 		
+		
+		TextInputDialog dialog = new TextInputDialog("");
+		dialog.setTitle("Move Photo");
+		dialog.setHeaderText("Move Photo");
+		dialog.setContentText("Move to Album: ");
+		
+		Optional<String> result = dialog.showAndWait();
+		movetoAlbum=result.get();
+		
+		
+		
+
 	}
 	
 	
