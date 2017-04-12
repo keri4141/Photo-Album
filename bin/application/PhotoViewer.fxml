@@ -29,7 +29,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <ListView fx:id="photolist" layoutX="605.0" layoutY="516.0" prefHeight="207.0" prefWidth="214.0" />
+            <ListView fx:id="tags" layoutX="605.0" layoutY="516.0" prefHeight="207.0" prefWidth="214.0" />
             <Label layoutX="691.0" layoutY="494.0" text="Tags">
                <font>
                   <Font size="18.0" />

@@ -33,7 +33,7 @@ import javafx.util.Pair;
 public class PhotoController {
 
 	@FXML
-	private ListView<Photos> photolist;
+	private ListView<Tag> tags;
 	
 	@FXML
 	private ImageView PHOTO_LIST;
@@ -45,10 +45,12 @@ public class PhotoController {
 	private ObservableList<Photos> photos_ObservableLIST= FXCollections.observableArrayList();
 	
 	  List<User> USERS;
+	  List<Photos> photolist;
 	    String userNAME;
 	    Album album_name;
 	    String photo_path;
-	    
+	    String selected_photo="";
+	    ImageView selected_image_view=null;
 	    boolean isalbumEmpty=false;
 	
 	public void start(Stage mainStage,String username, Album selected_album_name) throws ClassNotFoundException
@@ -119,11 +121,11 @@ public class PhotoController {
 		       			   		if(FileHandler.fileofUsers.get(i).getAlbumList().get(j).toString().equals(album_name.toString()))
 		       			   		{	
 		       			   				//loop through photo list
-		       			   			List<Photos> listofPaths=FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList();
-		       			   			
-		       			   				for(int k =0;k<listofPaths.size();k++)
+		       			   			photolist=FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList();
+		       			   				for(int k =0;k<photolist.size();k++)
 		       			   				{
-		       			   					photo_path=listofPaths.get(k).toString();
+		       			   					photo_path=photolist.get(k).toString();
+		       			   					
 			       			   				ImageView imageView= new ImageView();
 					       			   		Image image = new Image(photo_path);
 	
@@ -153,33 +155,13 @@ public class PhotoController {
 	    		Node temp1 = childNode.get(i);
 	    		temp1.setOnMouseClicked(Event -> {
 
-	    			//imageSelect((ImageView) temp1);
+	    			imageSelect((ImageView) temp1);
 
-	    			System.out.println("got it");
+	    			System.out.println("got: "+selected_photo);
 	    		});
 	    	}
        
-       
-       
-       //PHOTO_LIST.getChildren().add(new ImageView())
-       
-       /*
-        * May have to compare the pathname with the
-        * path in ImageView TilePanes with the
-        * pathname in the photos arraylist 
-        * 
-        * Image class holds the path name
-        * ImageView displays the images
-        * 
-        * Probably create a button that displays another window
-        * to display the captions / tags
-        * 
-        * 
-        * use pathname as identifier to display the correct
-        * caption and tags and date
-        */
-       
-       
+
 	}
 	
 	public void handleAddPhoto(ActionEvent e)
@@ -236,9 +218,9 @@ public class PhotoController {
 		    		Node temp1 = childNode.get(i);
 		    		temp1.setOnMouseClicked(Event -> {
 
-		    			//imageSelect((ImageView) temp1);
-
-		    			System.out.println("got it");
+		    			imageSelect((ImageView) temp1);
+		    			
+		    			System.out.println("got: "+selected_photo);
 		    		});
 		    	}
 		    	
@@ -258,15 +240,14 @@ public class PhotoController {
 		       			   		if(FileHandler.fileofUsers.get(i).getAlbumList().get(j).toString().equals(album_name.toString()))
 		       			   		{	
 			       			   		FileHandler.fileofUsers.get(i).getAlbumList().get(j).setPhoto(new_photo);
+			       			   		photolist.add(new_photo);
 			       			   	 //test to see if it was added
 			 		       		   System.out.println("PHOTO: "+FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList());
 			       			   		break;
 		       			   		}
 		       			   		
 		       			   }
-		       		   
-		       		   
-		       		  
+		      
 		       		   
 		       		   //add to observable list
 		       		//   photos_ObservableLIST.add(new_photo);
@@ -280,16 +261,63 @@ public class PhotoController {
 		 }
 		
 	}
-	/*
+	
 	public void imageSelect(ImageView imageview)
 	{
 		int imageIndex = PHOTO_PANE.getChildren().indexOf(imageview);
-		
-		Photos imagePhoto = PhotoList.get(imageIndex);
-	}*/
+		//imageIndex starts from 1
+		Photos imagePhoto = photolist.get(imageIndex-1);
+		selected_image_view=imageview;
+		selected_photo=imagePhoto.toString();
+	}
+	
+	
 	public void handleDeletePhoto(ActionEvent e)
 	{
+		if(selected_photo.equals("")==true)
+		{
+			 Alert alert =
+                     new Alert(Alert.AlertType.INFORMATION);
+             alert.setContentText("You must select a photo to delete!");
+             alert.showAndWait();
+             
+             return;   	
+		}
 		
+		else
+		{
+			 for(int i =0;i<USERS.size();i++)
+		       {
+		       	   if(USERS.get(i).toString().equals(userNAME))
+		       	   {
+		       		int albumlistLength=FileHandler.fileofUsers.get(i).getAlbumList().size();
+		       		   //add the album to matching username
+		       		   for(int j =0;j<albumlistLength;j++)
+		       			   {
+		       			   		
+		       			   		if(FileHandler.fileofUsers.get(i).getAlbumList().get(j).toString().equals(album_name.toString()))
+		       			   		{	
+		       			   				//loop through photo list
+		       			   			photolist=FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList();
+		       			   				for(int k =0;k<photolist.size();k++)
+		       			   				{
+		       			   					photo_path=photolist.get(k).toString();
+		       			   					
+			       			   				if(photo_path.equals(selected_photo))
+			       			   				{
+			       			   					FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList().remove(k);
+			       			   					PHOTO_PANE.getChildren().remove(selected_image_view);
+			       			   				}
+		       			   				}
+		       			   				break;		
+		       			   		}
+		       			   		
+		       			   } //end of album loop
+		   
+		       		break;
+		       	   }
+		       }
+		}
 	}
 	
 	public void dialog()
@@ -331,14 +359,9 @@ public class PhotoController {
 		Optional<String> result = dialog.showAndWait();
 		
 		photo_path=result.get();
-		
-		
-		
-		
+
 		
 	}
-	
-	
-	
+
 	
 }
