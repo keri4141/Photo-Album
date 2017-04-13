@@ -10,12 +10,14 @@ import java.util.List;
 
 import application.User;
 
-/*
- * Alvin Chau, Andy Phan 2017
+/**
+ * 
+ * @author Alvin Chau and Andy Phan 
+ *
  */
 public class FileHandler {
 
-		public static List<User> fileofUsers = new ArrayList<User>();
+	  public static List<User> fileofUsers = new ArrayList<User>();
 		
 		
 		
@@ -43,7 +45,11 @@ public class FileHandler {
 	        }
 
 	    }
-	    
+	    /**
+	     * 
+	     * @return
+	     * @throws ClassNotFoundException
+	     */
 	    public static List<User> retrieveUsers() throws ClassNotFoundException
 	    {
 	    	List<User> listU = null;

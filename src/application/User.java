@@ -4,18 +4,24 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * @author Alvin Chau and Andy Phan 
+ *
+ */
 
 public class User implements Serializable{
 
-		/**
-	 * 
-	 */
 	private static final long serialVersionUID = -661828491489966978L;
 
 		private String userName;
 	
 		private List<Album> album; //maybe LIST will be better
-		
+	
+	/**
+	 * 
+	 * @param userName
+	 */
 	public User(String userName)
 	{
 		this.userName=userName;
@@ -31,7 +37,10 @@ public class User implements Serializable{
 		
 	}
 	
-	//adds the album to the users list of albums
+	/**
+	 * adds the album to the users list of albums
+	 * @param album
+	 */
 	public void setAlbum(Album album)
 	{
 		
@@ -42,13 +51,16 @@ public class User implements Serializable{
 	{
 		return this.userName;
 	}
-	
+
 	public String toString()
     {
         return this.userName;
 
     }
-	
+	/**
+	 * 
+	 * @return album
+	 */
 	public List<Album> getAlbumList()
 	{
 		return this.album;

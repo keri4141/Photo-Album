@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-
+/**
+ * 
+ * @author Alvin Chau and Andy Phan 
+ *
+ */
 public class Photos implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -501614198631312081L;
 	private String caption;
 	private List<Tag> tag;
@@ -17,6 +18,12 @@ public class Photos implements Serializable{
 	private String pathtoImage;
 	private Calendar date;
 	
+	/**
+	 * 
+	 * @param caption
+	 * @param tag
+	 * @param date
+	 */
 	public Photos(String caption,ArrayList<Tag> tag, Calendar date)
 	{
 		this.caption=caption;
@@ -25,7 +32,10 @@ public class Photos implements Serializable{
 		//may not need to edit the isStock field;
 		
 	}
-	
+	/**
+	 * 
+	 * @param pathtoImage
+	 */
 	public Photos(String pathtoImage)
 	{
 		this.pathtoImage = pathtoImage;
@@ -43,7 +53,10 @@ public class Photos implements Serializable{
 		
 		
 	}
-	
+	/**
+	 * 
+	 * @param caption
+	 */
 	public void setCaption(String caption)
 	{
 		this.caption=caption;
@@ -53,13 +66,19 @@ public class Photos implements Serializable{
 	{
 		return this.caption;
 	}
-	
+	/**
+	 * 
+	 * @param tag
+	 */
 	public void setTag(Tag tag)
 	{
 		this.tag.add(tag);
 		
 	}
-	
+	/**
+	 * 
+	 * @return tag
+	 */
 	public List<Tag> getTagList()
 	{
 		return this.tag;

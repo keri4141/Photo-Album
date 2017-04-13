@@ -20,7 +20,9 @@ import javafx.stage.WindowEvent;
 
 import application.User;
 
-/*Alvin Chau Andy Phan 2017
+/**
+ * 
+ * @author Alvin Chau and Andy Phan 
  * 
  */
 
@@ -42,6 +44,11 @@ public class AdminController {
     
     private ObservableList<User> users= FXCollections.observableArrayList();
     
+    /**
+     * start()
+     * @param mainStage
+     * 
+     */
     public void start(Stage mainStage)
     {
     	
@@ -56,7 +63,11 @@ public class AdminController {
          
           userlist.setItems(users);
     }
-    
+    /**
+     * 
+     * @param e
+     * @throws IOException
+     */
     public void handleCreate(ActionEvent e) throws IOException
     {
     	 if("".equals(usernameField.getText()))
@@ -74,7 +85,11 @@ public class AdminController {
     	userlist.setItems(users); //add to list view
     	 FileHandler.WriteFile();
     }
-    
+    /**
+     * 
+     * @param e
+     * @throws IOException
+     */
     public void handleDelete(ActionEvent e) throws IOException
     {
     	User person = userlist.getSelectionModel().getSelectedItem();
@@ -92,7 +107,12 @@ public class AdminController {
         FileHandler.WriteFile();
       
     }
-    
+    /**
+     * 
+     * @param e
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public void handleLogout(ActionEvent e) throws IOException, ClassNotFoundException
     {
     	

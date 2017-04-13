@@ -1,0 +1,9 @@
+For our Photos program in order to run it you have to run main.java
+
+You must login first with admin and create a user then you can logout and log back in with the username you created.
+
+Once inside the user subsystem, you can the options of creating, deleting, renaming, and opening the albums in the list view. 
+
+When you open an album it will go to the photoviewer.fxml where you have the options of adding and deleting a photo. Once a photo is added by clicking on the photo you unlock the caption textarea and are able to add/delete tags as well.
+
+A problem that we came across with our photo program is that users cannot have the same photo in a same album.

@@ -22,8 +22,10 @@ import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-/*
- * Alvin Chau, Andy Phan 2017
+/**
+ * 
+ * @author Alvin Chau and Andy Phan 
+ *
  */
 public class AlbumController {
 	
@@ -57,7 +59,12 @@ public class AlbumController {
     
     private ObservableList<Album> albums_ObservableLIST= FXCollections.observableArrayList();
     
-    
+    /**
+     * 
+     * @param mainStage
+     * @param userName
+     * @throws ClassNotFoundException
+     */
     public void start(Stage mainStage, String userName) throws ClassNotFoundException
     {
     	//when window is closed save the file
@@ -111,7 +118,10 @@ public class AlbumController {
        
     }
     
-    
+    /**
+     * 
+     * @param e
+     */
 	public void handleRename(ActionEvent e)
 	{
 		dialogRename();
@@ -207,6 +217,12 @@ public class AlbumController {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param e
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 */
 	public void handleLogOut(ActionEvent e) throws ClassNotFoundException, IOException
 	{
 		FXMLLoader loader = new FXMLLoader();
@@ -226,7 +242,10 @@ public class AlbumController {
 		
 	}
 	
-	
+	/**
+	 * 
+	 * @param e
+	 */
 	public void handleCreate(ActionEvent e)
 	{
 		/*IF THE ALBUM NAME FIELD IS EMPTY*/
@@ -284,6 +303,10 @@ public class AlbumController {
 	 
 	}
 	
+	/**
+	 * 
+	 * @param e
+	 */
 	public void handleDelete(ActionEvent e)
 	{
 		//selected album
@@ -329,6 +352,12 @@ public class AlbumController {
     
 	}
 	
+	/**
+	 * 
+	 * @param e
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	public void handleOpen(ActionEvent e) throws IOException, ClassNotFoundException
 	{
 		

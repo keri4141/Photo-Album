@@ -37,9 +37,10 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Pair;
 
-/*
+/**
  * 
- * Alvin Chau, Andy Phan 2017
+ * @author Alvin Chau and Andy Phan 
+ *
  */
 public class PhotoController {
 	
@@ -83,6 +84,13 @@ public class PhotoController {
 	    /*This is used to check if the album is empty before loading the images upon starting the photoviewer */
 	    boolean isalbumEmpty=false;
 	
+	/**
+	 * 
+	 * @param mainStage
+	 * @param username
+	 * @param selected_album_name
+	 * @throws ClassNotFoundException
+	 */
 	public void start(Stage mainStage,String username, Album selected_album_name) throws ClassNotFoundException
 	{
 		//when window is closed save the file
@@ -205,6 +213,10 @@ public class PhotoController {
 	
 	}
 	
+	/**
+	 * 
+	 * @param e
+	 */
 	public void handleAddPhoto(ActionEvent e)
 	{
 	
@@ -313,6 +325,10 @@ public class PhotoController {
 		
 	}
 	
+	/**
+	 * 
+	 * @param imageview
+	 */
 	public void imageSelect(ImageView imageview)
 	{
 		
@@ -366,7 +382,10 @@ public class PhotoController {
 		selected_photo=imagePhoto.toString();
 	}
 	
-	
+	/**
+	 * 
+	 * @param e
+	 */
 	public void handleDeletePhoto(ActionEvent e)
 	{
 		
@@ -463,6 +482,12 @@ public class PhotoController {
 		
 	}
 	
+	/**
+	 * 
+	 * @param e
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	public void handleBack(ActionEvent e) throws IOException, ClassNotFoundException
 	{
 		FXMLLoader loader = new FXMLLoader();
@@ -482,6 +507,10 @@ public class PhotoController {
 		
 	}
 	
+	/**
+	 * 
+	 * @param e
+	 */
 	public void handleAddTag(ActionEvent e)
 	{
 		if(selected_photo.equals("")==true)
@@ -553,7 +582,10 @@ public class PhotoController {
 		}
 	}
 	
-	
+	/**
+	 * 
+	 * @param e
+	 */
 	public void handleDeleteTag(ActionEvent e)
 	{
 		Tag tag = tags.getSelectionModel().getSelectedItem();
@@ -607,7 +639,10 @@ public class PhotoController {
 		
 	}
 	
-	
+	/**
+	 * 
+	 * @param e
+	 */
 	public void handleSaveCaption(ActionEvent e)
 	{
 		if(selected_photo.equals("")==true)
@@ -663,7 +698,10 @@ public class PhotoController {
 		
 	}
 	
-	
+	/**
+	 * 
+	 * @param e
+	 */
 	public void handleMovePhoto(ActionEvent e)
 	{
 		dialogMovePhoto();

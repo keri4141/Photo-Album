@@ -6,10 +6,15 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 
-
+/**
+ * 
+ * @author Alvin Chau and Andy Phan 
+ *
+ */
 
 public class Main extends Application {
 	@Override
+
 	public void start(Stage primaryStage) {
 		try {
 		//	BorderPane root = new BorderPane();
@@ -29,7 +34,10 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}

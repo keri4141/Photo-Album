@@ -19,8 +19,10 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-/*Alvin Chau Andy phan 2017
+/**
  * 
+ * @author Alvin Chau and Andy Phan 
+ *
  */
 
 public class LoginController {
@@ -31,6 +33,11 @@ public class LoginController {
     private TextField userField;
     
     List<User> USERS;
+    /**
+     * 
+     * @param mainStage
+     * @throws ClassNotFoundException
+     */
     public void start(Stage mainStage) throws ClassNotFoundException
     {
     
@@ -51,7 +58,12 @@ public class LoginController {
 
     }
     
-   
+   /**
+    * 
+    * @param e
+    * @throws IOException
+    * @throws ClassNotFoundException
+    */
     public void handleLogin(ActionEvent e) throws IOException, ClassNotFoundException
     {
     	//name must not be empty
