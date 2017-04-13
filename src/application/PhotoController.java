@@ -839,8 +839,31 @@ public class PhotoController {
 		dialog.setHeaderText("Move Photo");
 		dialog.setContentText("Move to Album: ");
 		
+		 final Button ok = (Button) dialog.getDialogPane().lookupButton(ButtonType.OK);
+	        ok.addEventFilter(ActionEvent.ACTION, event ->
+	            System.out.println("OK was definitely pressed")
+	        );
+	        
+	        final Button cancel = (Button) dialog.getDialogPane().lookupButton(ButtonType.CANCEL);
+	        cancel.addEventFilter(ActionEvent.ACTION, event ->
+	            System.out.println("Cancel was definitely pressed")
+	        );
+		
+		
+		
 		Optional<String> result = dialog.showAndWait();
-		movetoAlbum=result.get();	
+			
+		
+		if(result.isPresent())
+		{
+			movetoAlbum=result.get();
+			return;
+		}
+		else
+		{
+			movetoAlbum="";
+			return;
+		}
 
 	}
 	
@@ -862,8 +885,30 @@ public class PhotoController {
 		dialog.setHeaderText("Copy Photo");
 		dialog.setContentText("Copy to Album: ");
 		
+		 final Button ok = (Button) dialog.getDialogPane().lookupButton(ButtonType.OK);
+	        ok.addEventFilter(ActionEvent.ACTION, event ->
+	            System.out.println("OK was definitely pressed")
+	        );
+	        
+	        final Button cancel = (Button) dialog.getDialogPane().lookupButton(ButtonType.CANCEL);
+	        cancel.addEventFilter(ActionEvent.ACTION, event ->
+	            System.out.println("Cancel was definitely pressed")
+	        );
+		
+		
 		Optional<String> result = dialog.showAndWait();
-		copytoAlbum=result.get();	
+		
+		if(result.isPresent())
+		{
+			copytoAlbum=result.get();	
+			return;
+		}
+		
+		else
+		{
+			copytoAlbum="";
+			return;
+		}
 
 	}
 	
@@ -877,7 +922,7 @@ public class PhotoController {
 					
 						 Alert alert =
 			                     new Alert(Alert.AlertType.INFORMATION);
-			             alert.setContentText("You didn't choose an album to move the photo");
+			             alert.setContentText("You didn't choose an album to copy the photo to");
 			             alert.showAndWait();
 						return;
 					

@@ -2,6 +2,7 @@ package application;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,14 +15,17 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 public class AlbumController {
 	
 	
+	List<Album> SOMEALBUMLIST;
 	@FXML
     private Button albumCreate;
 	
@@ -41,6 +45,8 @@ public class AlbumController {
     String userNAME;
     
     Album selected_album_name;
+    
+   String renameAlbumTO="";
     
     @FXML
     private ListView<Album> albumlist;
@@ -75,6 +81,9 @@ public class AlbumController {
        		//adds the list of albums that the logged in user has to observable list and listview
        		albums_ObservableLIST.addAll(USERS.get(i).getAlbumList());
        		albumlist.setItems(albums_ObservableLIST);
+       		albumlist.getSelectionModel().select(0);
+       	  selected_album_name = albumlist.getSelectionModel().getSelectedItem();
+
        		break;
        	   }
        }
@@ -104,8 +113,97 @@ public class AlbumController {
     
 	public void handleRename(ActionEvent e)
 	{
+		dialogRename();
+		
+		if(renameAlbumTO.equals("")==true)
+		{
+			 Alert alert =
+                     new Alert(Alert.AlertType.INFORMATION);
+             alert.setContentText("You didn't do anything to rename");
+             alert.showAndWait();
+             
+             return;   	
+		}
 		
 		
+		for(int i =0;i<USERS.size();i++)
+		{
+			if(USERS.get(i).toString().equals(userNAME))
+			{
+				int albumlistLength=FileHandler.fileofUsers.get(i).getAlbumList().size();
+				
+				for(int l=0;l<albumlistLength;l++)
+				{
+					if(FileHandler.fileofUsers.get(i).getAlbumList().get(l).toString().equals(renameAlbumTO)==true)
+					{
+						Alert alert =
+			                     new Alert(Alert.AlertType.INFORMATION);
+			             alert.setContentText("That name already exists!");
+			             alert.showAndWait();
+			             
+			             return;   	
+					}
+				}
+				
+				
+				for(int j=0;j<albumlistLength;j++)
+				{
+					if(FileHandler.fileofUsers.get(i).getAlbumList().get(j).toString().equals(selected_album_name.toString()))
+					{
+						albums_ObservableLIST.clear();
+						albumlist.setItems(albums_ObservableLIST);
+						
+						FileHandler.fileofUsers.get(i).getAlbumList().get(j).setAlbumName(renameAlbumTO);
+						
+						SOMEALBUMLIST=FileHandler.fileofUsers.get(i).getAlbumList();
+						//albums_ObservableLIST.addAll(USERS.get(i).getAlbumList());
+			       		//albumlist.setItems(albums_ObservableLIST);
+						break;
+					}
+				}
+				
+				break;
+			}
+		}
+		
+		albums_ObservableLIST.addAll(SOMEALBUMLIST);
+		albumlist.setItems(albums_ObservableLIST);
+		FileHandler.WriteFile();
+	}
+	
+	public void dialogRename()
+	{
+		
+		
+		
+		TextInputDialog dialog = new TextInputDialog("");
+		dialog.setTitle("Move Photo");
+		dialog.setHeaderText("Move Photo");
+		dialog.setContentText("Move to Album: ");
+		
+		 final Button ok = (Button) dialog.getDialogPane().lookupButton(ButtonType.OK);
+	        ok.addEventFilter(ActionEvent.ACTION, event ->
+	            System.out.println("OK was definitely pressed")
+	        );
+	        
+	        final Button cancel = (Button) dialog.getDialogPane().lookupButton(ButtonType.CANCEL);
+	        cancel.addEventFilter(ActionEvent.ACTION, event ->
+	            System.out.println("Cancel was definitely pressed")
+	        );
+		
+		
+		
+		Optional<String> result = dialog.showAndWait();
+		if(result.isPresent())
+		{
+			renameAlbumTO=result.get();	
+			return;
+		}
+		else
+		{
+			renameAlbumTO="";
+			return;
+		}
 	}
 	
 	public void handleLogOut(ActionEvent e) throws ClassNotFoundException, IOException
