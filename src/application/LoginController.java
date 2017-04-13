@@ -19,6 +19,9 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+/*Alvin Chau Andy phan 2017
+ * 
+ */
 
 public class LoginController {
 	@FXML
@@ -95,7 +98,7 @@ public class LoginController {
         			FXMLLoader loader = new FXMLLoader();
         	        loader.setLocation(getClass().getResource("UserSubsystem.fxml"));
         	        Parent root = (Parent) loader.load();
-                		//Parent home_page_parent=FXMLLoader.load(getClass().getResource("AdminSubsystem.fxml"));
+                		
                 		Scene home_page_scene=new Scene(root);
                 		Stage app_stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
                 	
@@ -109,8 +112,7 @@ public class LoginController {
         			break;
         		}
         		
-        		/*SIDE NOTE, W.E YU CHANGE THAT IMPLEMENTS SERIALIZABLE WILL MAKE A NEW FILE */
-        		/* on user sign in, move to the album creation page */
+        		
         	}
         }
         

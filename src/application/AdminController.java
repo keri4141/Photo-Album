@@ -20,6 +20,10 @@ import javafx.stage.WindowEvent;
 
 import application.User;
 
+/*Alvin Chau Andy Phan 2017
+ * 
+ */
+
 public class AdminController {
 	
 	
@@ -107,16 +111,7 @@ public class AdminController {
     		app_stage.show();
     		logincontrol.start(app_stage);
     		
-        	//login as admin stuff"
-        	//maybe add a user boolean is admin thing
-    	/*
-    	Parent home_page_parent=FXMLLoader.load(getClass().getResource("Login.fxml"));
-		Scene home_page_scene=new Scene(home_page_parent);
-		Stage app_stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-		app_stage.hide();
-		app_stage.setScene(home_page_scene);
-		app_stage.show();
-		 */
+        
     }
     
  

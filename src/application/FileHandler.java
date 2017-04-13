@@ -10,6 +10,9 @@ import java.util.List;
 
 import application.User;
 
+/*
+ * Alvin Chau, Andy Phan 2017
+ */
 public class FileHandler {
 
 		public static List<User> fileofUsers = new ArrayList<User>();

@@ -22,6 +22,9 @@ import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+/*
+ * Alvin Chau, Andy Phan 2017
+ */
 public class AlbumController {
 	
 	
@@ -99,9 +102,7 @@ public class AlbumController {
             if(newValue!=null) {
 
               selected_album_name=newValue;
-              
-              System.out.println("NEWLY SELECTED GUY " + selected_album_name);
-   
+         
 
             }
 
@@ -157,8 +158,7 @@ public class AlbumController {
 						FileHandler.fileofUsers.get(i).getAlbumList().get(j).setAlbumName(renameAlbumTO);
 						
 						SOMEALBUMLIST=FileHandler.fileofUsers.get(i).getAlbumList();
-						//albums_ObservableLIST.addAll(USERS.get(i).getAlbumList());
-			       		//albumlist.setItems(albums_ObservableLIST);
+						
 						break;
 					}
 				}
@@ -184,12 +184,12 @@ public class AlbumController {
 		
 		 final Button ok = (Button) dialog.getDialogPane().lookupButton(ButtonType.OK);
 	        ok.addEventFilter(ActionEvent.ACTION, event ->
-	            System.out.println("OK was definitely pressed")
+	            System.out.println("")
 	        );
 	        
 	        final Button cancel = (Button) dialog.getDialogPane().lookupButton(ButtonType.CANCEL);
 	        cancel.addEventFilter(ActionEvent.ACTION, event ->
-	            System.out.println("Cancel was definitely pressed")
+	            System.out.println("")
 	        );
 		
 		
@@ -270,9 +270,7 @@ public class AlbumController {
 	       	   {
 	       		   //add the album to matching username
 	       		   FileHandler.fileofUsers.get(i).setAlbum(new_album);
-	       		   
-	       		   //test to see if it was added
-	       		   System.out.println("ALBUM: "+FileHandler.fileofUsers.get(i).getAlbumList());
+	       		 
 	       		   
 	       		   //add to observable list
 	       		albums_ObservableLIST.add(new_album);
@@ -309,7 +307,7 @@ public class AlbumController {
 	       {
 	       	   if(USERS.get(i).toString().equals(userNAME))
 	       	   {
-	       		System.out.println("test "+album);
+	       
 	       		int albumlistLength=FileHandler.fileofUsers.get(i).getAlbumList().size();
 	       		   //add the album to matching username
 	       			for(int j =0;j<albumlistLength;j++)
@@ -322,14 +320,13 @@ public class AlbumController {
 	       					break;
 	       				}
 	       			}
-	       		System.out.println("HM: " + FileHandler.fileofUsers.get(i).getAlbumList());
+	       		
 	  
 	       		FileHandler.WriteFile();
 	       		break;
 	       	   }
 	       }
-       // FileHandler.fileofUsers.remove(album);
-        //FileHandler.WriteFile();
+    
 	}
 	
 	public void handleOpen(ActionEvent e) throws IOException, ClassNotFoundException

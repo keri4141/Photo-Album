@@ -38,9 +38,8 @@ import javafx.stage.WindowEvent;
 import javafx.util.Pair;
 
 /*
- * AN EXISTING BUG, SAME PHOTOS IN SAME ALBUM, no way to detect uniqueness between them, remove removes the first occurence
- * it doesnt remove a specific one
- * msut do a check on not just the pathname, but also the caption and tags to find uniqunes of photos
+ * 
+ * Alvin Chau, Andy Phan 2017
  */
 public class PhotoController {
 	
@@ -101,7 +100,7 @@ public class PhotoController {
        //user that logged in
        userNAME=username;
        
-       System.out.println("USER: " +userNAME+ " SELECTED ALBUM: "+ album_name);
+
 		
        //POPULATE WITH IMAGES
        
@@ -199,19 +198,11 @@ public class PhotoController {
 
 	    			imageSelect((ImageView) temp1);
 
-	    			System.out.println("got: "+selected_photo);
+	    			
 	    		});
 	    	}
 	    	
-	    	
-	    //display tags
-	    /*
-	     * when an image is clicked it should display the tags
-	     * so go into imageSelect when an image is selected i would want to compare the photo selected with the user list
-	     * 
-	     */
-	    	
-
+	
 	}
 	
 	public void handleAddPhoto(ActionEvent e)
@@ -285,7 +276,7 @@ public class PhotoController {
 
 		    			imageSelect((ImageView) temp1);
 		    			
-		    			System.out.println("got: "+selected_photo);
+		    			
 		    		});
 		    	}
 		    	
@@ -307,17 +298,12 @@ public class PhotoController {
 			       			   		FileHandler.fileofUsers.get(i).getAlbumList().get(j).setPhoto(new_photo);
 			       			   		photolist=FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList();
 			       			   	 //test to see if it was added
-			 		       		   System.out.println("PHOTO: "+FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList());
 			       			   		break;
 		       			   		}
 		       			   		
 		       			   }
 		      
-		       		   
-		       		   //add to observable list
-		       		//   tags_ObservableLIST.add(tag);
-		       		//add to the list view
-		       		//tags.setItems(tags_ObservableLIST);
+		       	
 		       		
 		       		FileHandler.WriteFile();
 		       		break;
@@ -473,9 +459,7 @@ public class PhotoController {
 		
 		TagName=fn.getText();
 		TagValue=ln.getText();
-		System.out.println(TagName);
-		System.out.println(TagValue);
-
+		
 		
 	}
 	
@@ -548,7 +532,6 @@ public class PhotoController {
 			       			   				{	
 			       			   					//
 			       			   					FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList().get(k).setTag(tag);
-			       			   					System.out.println(FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList().get(k).getTagList());
 			       			   				break;
 			       			   				}
 			       			   				
@@ -606,7 +589,6 @@ public class PhotoController {
 		       			   					//
 		       			   					
 		       			   					FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList().get(k).getTagList().remove(tag);
-		       			   					//stem.out.println(FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList().get(k).getTagList());
 		       			   				break;
 		       			   				}
 		       			   				
@@ -620,7 +602,7 @@ public class PhotoController {
 	       	   }
 	       }
         
-        //leHandler.fileofUsers.remove(person);
+   
         FileHandler.WriteFile();
 		
 	}
@@ -663,7 +645,6 @@ public class PhotoController {
 			       			   					//
 			       			   					
 			       			   					FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList().get(k).setCaption(captiontextArea.getText());;
-			       			   					//stem.out.println(FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList().get(k).getTagList());
 			       			   				break;
 			       			   				}
 			       			   				
@@ -763,7 +744,7 @@ public class PhotoController {
 			
 				       				
 				       				phototoAlbum=FileHandler.fileofUsers.get(i).getAlbumList().get(n);
-				       				System.out.println("MOVING TO: "+phototoAlbum);
+				       			
 				       				break;
 				       			}
 				       		}
@@ -776,7 +757,7 @@ public class PhotoController {
 				       			   		{	
 				       			   				
 				       			   			current_photoAlbum=FileHandler.fileofUsers.get(i).getAlbumList().get(j);	
-				       			   			System.out.println("Current Album: "+current_photoAlbum);
+				       			   			
 				       			   				break;		
 				       			   		}
 				       			   		
@@ -841,12 +822,12 @@ public class PhotoController {
 		
 		 final Button ok = (Button) dialog.getDialogPane().lookupButton(ButtonType.OK);
 	        ok.addEventFilter(ActionEvent.ACTION, event ->
-	            System.out.println("OK was definitely pressed")
+	            System.out.println("")
 	        );
 	        
 	        final Button cancel = (Button) dialog.getDialogPane().lookupButton(ButtonType.CANCEL);
 	        cancel.addEventFilter(ActionEvent.ACTION, event ->
-	            System.out.println("Cancel was definitely pressed")
+	            System.out.println("")
 	        );
 		
 		
@@ -887,12 +868,12 @@ public class PhotoController {
 		
 		 final Button ok = (Button) dialog.getDialogPane().lookupButton(ButtonType.OK);
 	        ok.addEventFilter(ActionEvent.ACTION, event ->
-	            System.out.println("OK was definitely pressed")
+	            System.out.println("")
 	        );
 	        
 	        final Button cancel = (Button) dialog.getDialogPane().lookupButton(ButtonType.CANCEL);
 	        cancel.addEventFilter(ActionEvent.ACTION, event ->
-	            System.out.println("Cancel was definitely pressed")
+	            System.out.println("")
 	        );
 		
 		
@@ -988,7 +969,7 @@ public class PhotoController {
 						       				}
 						       				
 						       				phototoAlbum=FileHandler.fileofUsers.get(i).getAlbumList().get(n);
-						       				System.out.println("COPYING TO: "+phototoAlbum);
+						       				
 						       				break;
 						       			}
 						       		}
