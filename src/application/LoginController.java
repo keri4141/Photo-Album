@@ -30,6 +30,7 @@ public class LoginController {
     List<User> USERS;
     public void start(Stage mainStage) throws ClassNotFoundException
     {
+    
     	//when window is closed save the file
         mainStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent event) {
@@ -38,6 +39,8 @@ public class LoginController {
         });
         
         FileHandler.ReadFile();
+        
+        
         
         /*TESTING IF I CAN READ FROM FILE*/
        USERS= FileHandler.retrieveUsers();

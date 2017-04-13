@@ -13,6 +13,9 @@ import application.User;
 public class FileHandler {
 
 		public static List<User> fileofUsers = new ArrayList<User>();
+		
+		
+		
 	  private static final String path = "./Userlist.bin"; //stores the bytes for the list of songs
 
 	    public static void ReadFile()

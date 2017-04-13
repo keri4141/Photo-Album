@@ -128,12 +128,13 @@ public class AlbumController {
 		
 		for(int i =0;i<USERS.size();i++)
 		{
-			if(USERS.get(i).toString().equals(userNAME))
+			if(USERS.get(i).toString().equals(userNAME)) //check if the user logged in with the same name
 			{
 				int albumlistLength=FileHandler.fileofUsers.get(i).getAlbumList().size();
-				
-				for(int l=0;l<albumlistLength;l++)
+				 //get the album length
+				for(int l=0;l<albumlistLength;l++) //loop through the album list
 				{
+					//finds the album with the name that i want to rename it with
 					if(FileHandler.fileofUsers.get(i).getAlbumList().get(l).toString().equals(renameAlbumTO)==true)
 					{
 						Alert alert =
