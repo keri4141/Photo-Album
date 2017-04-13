@@ -252,6 +252,15 @@ public class PhotoController {
 					else
 					{
 		    		photo_path = selectedFile.toURI().toURL().toString();
+			    		if(photolist.toString().contains(photo_path)==true)
+			    		{
+			    			 Alert alert =
+			                         new Alert(Alert.AlertType.INFORMATION);
+			                 alert.setContentText("This image already exists in your album!");
+			                 alert.showAndWait();
+			                 
+			                 return;   	
+			    		}
 					}
 		    	} catch (MalformedURLException e1) {
 		    		// TODO Auto-generated catch block
@@ -296,7 +305,7 @@ public class PhotoController {
 		       			   		if(FileHandler.fileofUsers.get(i).getAlbumList().get(j).toString().equals(album_name.toString()))
 		       			   		{	
 			       			   		FileHandler.fileofUsers.get(i).getAlbumList().get(j).setPhoto(new_photo);
-			       			   		//photolist.add(new_photo);
+			       			   		photolist=FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList();
 			       			   	 //test to see if it was added
 			 		       		   System.out.println("PHOTO: "+FileHandler.fileofUsers.get(i).getAlbumList().get(j).getPhotoList());
 			       			   		break;
@@ -738,8 +747,21 @@ public class PhotoController {
 				       		//loop to find the album that to move the photo to
 				       		for(int n =0;n<albumlistLength;n++)
 				       		{
+				       			
+				       			
 				       			if(FileHandler.fileofUsers.get(i).getAlbumList().get(n).toString().equals(movetoAlbum))
 				       			{
+				       				if(FileHandler.fileofUsers.get(i).getAlbumList().get(n).getPhotoList().toString().contains(selected_photo))
+				       				{
+				       					Alert alert =
+				       	                     new Alert(Alert.AlertType.INFORMATION);
+				       	             alert.setContentText("This photo exists already in that album!");
+				       	             alert.showAndWait();
+				       	             
+				       	             return;   	
+				       				}
+			
+				       				
 				       				phototoAlbum=FileHandler.fileofUsers.get(i).getAlbumList().get(n);
 				       				System.out.println("MOVING TO: "+phototoAlbum);
 				       				break;
@@ -910,6 +932,16 @@ public class PhotoController {
 						       		{
 						       			if(FileHandler.fileofUsers.get(i).getAlbumList().get(n).toString().equals(copytoAlbum))
 						       			{
+						       				if(FileHandler.fileofUsers.get(i).getAlbumList().get(n).getPhotoList().toString().contains(selected_photo))
+						       				{
+						       					Alert alert =
+						       	                     new Alert(Alert.AlertType.INFORMATION);
+						       	             alert.setContentText("This photo exists already in that album!");
+						       	             alert.showAndWait();
+						       	             
+						       	             return;   	
+						       				}
+						       				
 						       				phototoAlbum=FileHandler.fileofUsers.get(i).getAlbumList().get(n);
 						       				System.out.println("COPYING TO: "+phototoAlbum);
 						       				break;
